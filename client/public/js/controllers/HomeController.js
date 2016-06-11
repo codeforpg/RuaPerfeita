@@ -134,9 +134,9 @@
         }
 
         function select(icon){
-            if(hc.stick.icon != 'icon/'+icon+'.png') {
-                hc.stick.icon = 'icon/' + icon + '.png';
-                hc.stick.html = 'template/' + icon + '.html';
+            if(hc.stick.icon != 'public/icon/'+icon+'.png') {
+                hc.stick.icon = 'public/icon/' + icon + '.png';
+                hc.stick.html = 'public/template/' + icon + '.html';
                 switch (icon) {
                     case 'lombada':
                         hc.stick.title = 'Lombada';

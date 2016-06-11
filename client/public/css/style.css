@@ -89,15 +89,10 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
     background-color: yellow;
 }
 
-.page-header > h1 {
-    color: rgb(140, 141, 252);
-    margin: 0;
-    padding: 0;
+.brand-color{
+    color: rgb(140, 141, 252) !important;
 }
 
-.page-header{
-    margin: 20px 0 20px 20px !important;
-}
 
 .cursor-pointer{
     cursor: pointer;
@@ -110,4 +105,8 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 
 .container{
     background-color: rgb(240, 237, 229);
+}
+
+.padding-top{
+    padding-top: 25px;
 }
