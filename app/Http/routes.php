@@ -27,3 +27,7 @@ Route::get('/', function () {
 */
 
 Route::resource('pin', 'PinController', ['only' => ['index', 'store', 'update']]);
+Route::resource('tipo', 'TipoController', ['only' => ['index', 'store', 'update']]);
+Route::resource('categoria', 'CategoriaController', ['only' => ['index', 'store', 'update']]);
+Route::resource('voto', 'VotoController', ['only' => ['index', 'store', 'update']]);
+
