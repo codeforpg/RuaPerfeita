@@ -2,17 +2,20 @@
 	'use strict'
 
 	angular
-		.module('app', ['ngRoute'])
+		.module('app', ['ngRoute', 'uiGmapgoogle-maps'])
 		.config(routeConfig)
 
-	routeConfig.$inject = ['$routeProvider', '$locationProvider'];
+	routeConfig.$inject = ['$routeProvider', '$locationProvider', '$httpProvider'];
 
-	function routeConfig($routeProvider, $locationProvider) {
-		$locationProvider.html5Mode(true);
+	function routeConfig($routeProvider, $locationProvider, $httpProvider) {
+		$httpProvider.defaults.useXDomain = true;
+		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
 		$routeProvider
 			.when('/',{
-				templateUrl: 'html/home.html'
+				templateUrl: 'html/home.html',
+				controller: 'HomeController',
+				controllerAs: 'hc'
 			})
 
 			.otherwise({ redirectTo: '/' });

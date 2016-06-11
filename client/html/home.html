@@ -1,9 +1,9 @@
 <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading" ng-click="comoUsar = !comoUsar">
+            <div class="panel-heading" ng-init="hc.comoUsar = false" ng-click="hc.comoUsar = !hc.comoUsar">
                 <h3 class="panel-title cursor-pointer">Como usar</h3>
             </div>
-            <div ng-show="comoUsar" class="panel-body">
+            <div ng-show="hc.comoUsar" class="panel-body">
                 <ul>
                     <li><p>1 - Localize a rua que voce acha que precise de melhorias</p></li>
                     <li><p>2 - Escolha sua na lista a direita</p></li>
@@ -14,10 +14,10 @@
     </div>
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-heading" ng-click="tenteTambem = !tenteTambem">
+            <div class="panel-heading" ng-init="hc.tenteTambem = false" ng-click="hc.tenteTambem = !hc.tenteTambem">
                 <h3 class="panel-title cursor-pointer">Tente também</h3>
             </div>
-            <div ng-show="tenteTambem" class="panel-body">
+            <div ng-show="hc.tenteTambem" class="panel-body">
                 <ul>
                     <li><p>1 - Veja outras melhorias da cidade ou do seu bairro</p></li>
                     <li><p>2 - Click sobre elas</p></li>
@@ -29,19 +29,19 @@
     <div class="map">
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
             <ui-gmap-google-map id="map"
-                                center="map.center"
-                                pan="map.pan"
-                                zoom="map.zoom"
+                                center="hc.map.center"
+                                pan="hc.map.pan"
+                                zoom="hc.map.zoom"
                                 draggable="true"
-                                refresh="map.refresh"
-                                options="map.options"
-                                events="map.events"
-                                bounds="map.bounds">
+                                refresh="hc.map.refresh"
+                                options="hc.map.options"
+                                events="hc.map.events"
+                                bounds="hc.map.bounds">
 
 
                 <ui-gmap-drag-zoom keyboardkey="'alt'"></ui-gmap-drag-zoom>
                 <ui-gmap-marker
-                        ng-repeat="p in pins" idKey="$index" coords="{latitude:p.lat,longitude:p.lng}" options="{icon:p.icon}">
+                        ng-repeat="p in hc.pins" idKey="$index" coords="{latitude:p.lat,longitude:p.lng}" options="{icon:p.icon}">
                     <ui-gmap-window isIconVisibleOnClick="true">
                         <div>
                             <h1 ng-bind="$parent.p.title"></h1>
@@ -49,8 +49,8 @@
                                 votos: <span ng-bind="$parent.p.voto"></span>
                             </div>
                             <div ng-show="!$parent.p.hideButton">
-                                <button ng-click="$parent.votar($parent.p,true)">like</button>
-                                <button ng-click="$parent.votar($parent.p,false)">dislike</button>
+                                <button ng-click="$parent.hc.votar($parent.p,true)">like</button>
+                                <button ng-click="$parent.hc.votar($parent.p,false)">dislike</button>
                             </div>
                         </div>
                     </ui-gmap-window>
@@ -61,11 +61,11 @@
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
             <ul class="col-lg-12">
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'public/icon/lombada.png'}" ng-click="select('lombada')" src="public/img/lombada.png" alt="lombada"></li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'public/icon/semaforo.png'}" ng-click="select('semaforo')" src="public/img/semaforo.png" alt="semaforo"></li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'public/icon/nao_semaforo.png'}" ng-click="select('nao_semaforo')" src="public/img/nao_semaforo.png" alt="nao_semaforo"></li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'public/icon/nao_lombada.png'}" ng-click="select('nao_lombada')" src="public/img/nao_lombada.png" alt="nao_lombada"></li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'public/icon/nao_estacionamento.png'}" ng-click="select('nao_estacionamento')" src="public/img/nao_estacionamento.png" alt="nao_estacionamento"></li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':hc.stick.icon == 'public/icon/lombada.png'}" ng-click="hc.select('lombada')" src="public/img/lombada.png" alt="lombada"></li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':hc.stick.icon == 'public/icon/semaforo.png'}" ng-click="hc.select('semaforo')" src="public/img/semaforo.png" alt="semaforo"></li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':hc.stick.icon == 'public/icon/nao_semaforo.png'}" ng-click="hc.select('nao_semaforo')" src="public/img/nao_semaforo.png" alt="nao_semaforo"></li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':hc.stick.icon == 'public/icon/nao_lombada.png'}" ng-click="hc.select('nao_lombada')" src="public/img/nao_lombada.png" alt="nao_lombada"></li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':hc.stick.icon == 'public/icon/nao_estacionamento.png'}" ng-click="hc.select('nao_estacionamento')" src="public/img/nao_estacionamento.png" alt="nao_estacionamento"></li>
             </ul>
         </div>
     </div>
