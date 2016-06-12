@@ -20,23 +20,23 @@
 
         function getPin() {
             return $http.get(_url + 'pin')
-                .then(response){
+                .then(function(response){
                     console.log(response)
                     return response
-                }
+                })
         }
 
         function savePin(data) {
             return $http.post(_url + 'pin', data)
-                .then(response){
+                .then(function(response){
                     console.log(response);
                     return response
-                }
+                })
         }
 
         function votar(pin, voto) {
             return $http.patch('pin/' + pin.id_pin)
-                .then(function (response) {
+                .then(function(response) {
                     console.log(response)
                     return response;
                 })
