@@ -10,6 +10,8 @@
     <!-- Style -->
     <link rel="stylesheet" href="public/css/style.css">
     <link rel="stylesheet" href="public/css/bootstrap.css">
+    <link rel="stylesheet" href="public/css/animate.css">
+    <link rel="stylesheet" href="public/css/font-awesome/css/font-awesome.min.css">
 
     <!-- Libs  -->
     <script src="public/js/libs/dev_deps.js"></script>
@@ -24,49 +26,67 @@
 
     <!-- App -->
     <script src="public/js/app.js"></script>
-    
+    <script src="public/js/script.js"></script>
+
     <!-- Controllers -->
     <script type="text/javascript" src="public/js/controllers/HomeController.js"></script>
 
     <!-- Services -->
+    <script type="text/javascript" src="public/js/services/home.service.js"></script>
 
     <!-- Filters -->
 
     <!-- Directives -->
 </head>
 
-<body>
+<body id="body" class="preload">
+<div id="loader-wrapper">
+    <div id="loader"></div>
+
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+</div>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+            data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand brand-color" href="/">RuaPerfeita</a>
+            <a class="navbar-brand brand-color" href="#/">RuaPerfeita</a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Sobre nós</a></li>
+                <li><a href="#/">Home</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="https://www.facebook.com/Code-For-Ponta-Grossa-1663271337246663/?fref=ts" target="_blank">By: Code For PG</a></li>
+                <li><a href="https://www.facebook.com/Code-For-Ponta-Grossa-1663271337246663/?fref=ts" target="_blank">By:
+                    Code For PG</a></li>
             </ul>
         </div>
     </div>
 </nav>
+
 <div class="container main" class="row">
     <div class="padding-top" ng-view>
     </div>
 </div>
-<footer class="footer">
-    <div class="container text-center">
-        <p class="text-muted"><a target="_blank" href="https://github.com/codeforpg">on GitHub</a> https://github.com/codeforpg</p>
-    </div>
+
+<footer>
+    <p class="text-center footer">
+        © 2016 CodeForPG
+        <a target="_blank" href="https://github.com/codeforpg">
+            <i class="fa fa-github fa-3x"></i>
+        </a>
+        <a target="_blank" href="https://www.facebook.com/Code-For-Ponta-Grossa-1663271337246663/?fref=ts">
+            <i class="fa fa-facebook-square fa-3x"></i>
+        </a>
+    </p>
 </footer>
 
 </body>

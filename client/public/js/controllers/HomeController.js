@@ -5,20 +5,19 @@
         .module('app')
         .controller('HomeController', HomeController);
 
-    HomeController.$inject = ['$log', 'uiGmapGoogleMapApi', '$http'];
+    HomeController.$inject = ['$log', 'uiGmapGoogleMapApi', '$http', '$scope', 'homeService'];
 
-    function HomeController($log, uiGmapGoogleMapApi, $http) {
+    function HomeController($log, uiGmapGoogleMapApi, $http, $scope, homeService) {
         var hc = this;
         hc.pins;
         hc.map;
         hc.stick;
         hc.icon;
         hc.userVoto;
-        hc.getPins = getPins;
         hc.initMap = initMap;
+        hc.getPins = getPins;
         hc.uiMapApi = uiMapApi;
         hc.add = add;
-        hc.votar = votar;
         hc.select = select;
         /////
 
@@ -34,39 +33,41 @@
         }
 
         function getPins() {
-            $http.get('pin').then(function (result) {
-                var pins = result.data
-                angular.forEach(pins, function (p) {
-                    var pin = {};
-                    pin.id_pin = p.id_pin;
-                    pin.lat = p.lat;
-                    pin.lng = p.long;
-                    pin.voto = p.voto;
-                    switch (p.tipo) {
-                        case 1:
-                            pin.title = 'Lombada';
-                            pin.icon = 'icon/lombada.png';
-                            break;
-                        case 2:
-                            pin.title = 'Remover Lombada';
-                            pin.icon = 'icon/nao_lombada.png';
-                            break;
-                        case 3:
-                            pin.title = 'Semaforo';
-                            pin.icon = 'icon/semaforo.png';
-                            break;
-                        case 4:
-                            pin.title = 'Remover Semaforo';
-                            pin.icon = 'icon/nao_semaforo.png';
-                            break;
-                        case 6:
-                            pin.title = 'Remover Estacionamento';
-                            pin.icon = 'icon/nao_estacionamento.png';
-                            break;
-                    }
-                    hc.pins.push(pin);
+            homeService.getPin()
+                .then(function (result) {
+                    console.log(result)
+                    var pins = result.data
+                    angular.forEach(pins, function (p) {
+                        var pin = {};
+                        pin.id_pin = p.id_pin;
+                        pin.lat = p.lat;
+                        pin.lng = p.long;
+                        pin.voto = p.voto;
+                        switch (p.tipo) {
+                            case 1:
+                                pin.title = 'Lombada';
+                                pin.icon = 'icon/lombada.png';
+                                break;
+                            case 2:
+                                pin.title = 'Remover Lombada';
+                                pin.icon = 'icon/nao_lombada.png';
+                                break;
+                            case 3:
+                                pin.title = 'Semaforo';
+                                pin.icon = 'icon/semaforo.png';
+                                break;
+                            case 4:
+                                pin.title = 'Remover Semaforo';
+                                pin.icon = 'icon/nao_semaforo.png';
+                                break;
+                            case 6:
+                                pin.title = 'Remover Estacionamento';
+                                pin.icon = 'icon/nao_estacionamento.png';
+                                break;
+                        }
+                        hc.pins.push(pin);
+                    })
                 })
-            })
         }
 
         function initMap() {
@@ -87,14 +88,13 @@
                             pin.lng = originalEventArgs[0].latLng.lng()
                             pin.icon = hc.icon;
                             hc.add(pin)
-                            hc.$evalAsync();
+                            $scope.$evalAsync();
                             hc.stick = {};
                         }
                     }
                 },
                 bounds: {}
             };
-            ;
             return map;
         }
 
@@ -117,7 +117,7 @@
             });
         }
 
-        function add(pin){
+        function add(pin) {
             pin.icon = hc.stick.icon;
             pin.html = hc.stick.html;
             pin.title = hc.stick.title;
@@ -126,15 +126,17 @@
             var data = {
                 lat: pin.lat,
                 long: pin.lng,
-                tipo:  hc.stick.tipo
+                tipo: hc.stick.tipo
             };
-            $http.post('/pin',data).then(function(result){
-                hc.getPins();
-            })
+            
+            homeService.savePin(data)
+                .then(function (response) {
+                    hc.getPins();
+                })
         }
 
-        function select(icon){
-            if(hc.stick.icon != 'public/icon/'+icon+'.png') {
+        function select(icon) {
+            if (hc.stick.icon != 'public/icon/' + icon + '.png') {
                 hc.stick.icon = 'public/icon/' + icon + '.png';
                 hc.stick.html = 'public/template/' + icon + '.html';
                 switch (icon) {
@@ -164,25 +166,28 @@
                         hc.stick.voto = 0;
                         break;
                 }
-            }else{
+            } else {
                 hc.stick = {};
             }
         }
 
-        function votar(pin,status){
-            if(!pin.hideButton) {
+        function votar(pin, status) {
+            if (!pin.hideButton) {
                 if (status) {
                     pin.voto = pin.voto + 1;
                     pin.hideButton = true;
-                    $http.patch('pin/' + pin.id_pin, {voto: 1}).then(function (result) {
-                        hc.getPins();
-                    })
+                    homeService.voto(pin, {voto: 1})
+                        .then(function (result) {
+                            hc.getPins();
+                        })
                 } else {
                     pin.voto = pin.voto - 1;
                     pin.hideButton = true;
-                    $http.patch('pin/' + pin.id_pin, {voto: -1}).then(function (result) {
-                        hc.getPins();
-                    })
+
+                    homeService.voto(pin, {voto: -1})
+                        .then(function (result) {
+                            hc.getPins();
+                        })
 
                 }
                 hc.userVoto = false;
