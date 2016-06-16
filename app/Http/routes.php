@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::get('/teste',function(){
+    event(new App\Events\PinEvent());
+    return 'foi';
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
