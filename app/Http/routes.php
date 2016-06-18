@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 Route::get('/teste',function(){
-    event(new App\Events\PinEvent());
+    event(new App\Events\PinEvent(['teste' => 'teste123']));
     return 'foi';
 });
 

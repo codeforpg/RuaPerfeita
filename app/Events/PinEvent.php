@@ -12,15 +12,13 @@ class PinEvent extends Event implements ShouldBroadcast
 
     public $data;
 
-    public function __construct()
+    public function __construct($pin)
     {
-        $this->data = array(
-            'power'=> '10'
-        );
+        $this->data = $pin;
     }
 
     public function broadcastOn()
     {
-        return ['event-channel'];
+        return ['rua-perfeita'];
     }
 }

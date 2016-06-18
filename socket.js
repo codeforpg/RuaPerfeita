@@ -3,7 +3,7 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var Redis = require('ioredis');
 var redis = new Redis();
-redis.subscribe('event-channel', function(err, count) {
+redis.subscribe('rua-perfeita', function(err, count) {
 });
 redis.on('message', function(channel, message) {
     console.log('Message Recieved: ' + message);

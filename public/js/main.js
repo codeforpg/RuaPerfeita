@@ -4,8 +4,7 @@
     angular
         .module('app',[
             'ngRoute',
-            'uiGmapgoogle-maps',
-            'ngSocket'
+            'uiGmapgoogle-maps'
         ])
     
 })()

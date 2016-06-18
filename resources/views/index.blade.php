@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body ng-cloak ng-controller="MainController as mc">
+<body ng-cloak>
 
 <div ng-view>
 
@@ -21,11 +21,12 @@
 <script src="node_modules/lodash/lodash.min.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-<script src="lib/socket.js"></script>
-<script src="lib/ngSocket.js"></script>
+<script src="/lib/socket.io.js"></script>
 <script src="js/main.js"></script>
+<script src="js/provider/rua_perfeita.provider.js"></script>
 <script src="js/controllers/main.controller.js"></script>
 <script src="js/controllers/google.controller.js"></script>
 <script src="js/service/socket.service.js"></script>
+<script src="js/service/pin.service.js"></script>
 </body>
 </html>

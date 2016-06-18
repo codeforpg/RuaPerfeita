@@ -5,9 +5,9 @@
         .module('app')
         .config(MainConfig)
         .controller('MainController',MainController)
-
-    MainConfig.$inject = ['$locationProvider']
-    function MainConfig(location){
+    
+    MainConfig.$inject = ['$locationProvider','RuaPerfeitaProvider']
+    function MainConfig(location,RuaPerfeita){
         location.html5Mode(true);
     }
 
@@ -15,8 +15,10 @@
     function MainController(Socket) {
         var mc = this;
         mc.map;
-        Socket.onMessage(function(message){
-            console.log(message);
+        Socket.connect('http://localhost:3000')
+        Socket.addListEvent('PinEvent')
+        Socket.on('PinEvent',function(message){
+            console.log(123,message)
         })
     }
 })()
