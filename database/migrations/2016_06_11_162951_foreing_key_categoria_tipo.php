@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ForeignKeyPinResposta extends Migration
+class ForeingKeyCategoriaTipo extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class ForeignKeyPinResposta extends Migration
      */
     public function up()
     {
-        Schema::table('resposta', function($table) {
-            $table->foreign('id_pin')->references('id_pin')->on('pin');
+        Schema::table('categoria', function($table) {
+            $table->foreign('tipo')->references('id_tipo')->on('tipo');
         });
     }
 
@@ -24,8 +24,6 @@ class ForeignKeyPinResposta extends Migration
      */
     public function down()
     {
-        Schema::table('resposta', function($table) {
-            $table->dropForeign('resposta_id_pin_foreign');
-        });
+        Schema::dropForeign('categoria_tipo_foreign');
     }
 }
