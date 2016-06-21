@@ -9,12 +9,12 @@
     function PinService(http,RuaPerfeita){
         this.add = add;
         var _error = _error,
-            _url = RuaPerfeita.urlBase+'pin'
+            _url = RuaPerfeita.urlBase+'pin/'
 
         /////////
         
         function add(pin){
-            return http.post(_url+'create',pin)
+            return http.post(_url,pin)
                 .then(function(response){
                     return response.data;
                 })

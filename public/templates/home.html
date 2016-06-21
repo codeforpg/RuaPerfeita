@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div data-ng-controller="MainController" class="map">
+    <div class="map" data-ng-controller="GoogleController as gc">
         <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
             <ui-gmap-google-map class="map"
                                 center="gc.map.center"
@@ -51,11 +51,31 @@
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
             <ul class="col-lg-12">
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'icon/lombada.png'}" ng-click="select('lombada')" src="img/lombada.png" alt="lombada"></li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'icon/semaforo.png'}" ng-click="select('semaforo')" src="img/semaforo.png" alt="semaforo"></li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'icon/nao_semaforo.png'}" ng-click="select('nao_semaforo')" src="img/nao_semaforo.png" alt="nao_semaforo"></li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'icon/nao_lombada.png'}" ng-click="select('nao_lombada')" src="img/nao_lombada.png" alt="nao_lombada"></li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6"><img ng-class="{'active':stick.icon == 'icon/nao_estacionamento.png'}" ng-click="select('nao_estacionamento')" src="img/nao_estacionamento.png" alt="nao_estacionamento"></li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
+                    <a ng-click="gc.select(1)" >
+                        <img ng-class="{'active':gc.pin == 1}" src="img/lombada.png" alt="lombada">
+                    </a>
+                </li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
+                    <a ng-click="gc.select(2)" >
+                        <img ng-class="{'active':gc.pin == 2}" src="img/semaforo.png" alt="semaforo">
+                    </a>
+                </li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
+                    <a ng-click="gc.select(3)" >
+                        <img ng-class="{'active':gc.pin == 3}" src="img/nao_semaforo.png" alt="nao_semaforo">
+                    </a>
+                </li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
+                    <a ng-click="gc.select(4)" >
+                        <img ng-class="{'active':gc.pin == 4}" src="img/nao_lombada.png" alt="nao_lombada">
+                    </a>
+                </li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
+                    <a ng-click="gc.select(5)" >
+                        <img ng-class="{'active':gc.pin == 5}" src="img/nao_estacionamento.png" alt="nao_estacionamento">
+                    </a>
+                </li>
             </ul>
         </div>
     </div>

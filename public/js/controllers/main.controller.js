@@ -6,8 +6,16 @@
         .config(MainConfig)
         .controller('MainController',MainController)
     
-    MainConfig.$inject = ['$locationProvider','RuaPerfeitaProvider']
-    function MainConfig(location,RuaPerfeita){
+    MainConfig.$inject = ['$routeProvider','$locationProvider','RuaPerfeitaProvider']
+    function MainConfig(route,location,RuaPerfeita){
+        route
+            .when('/', {
+                templateUrl: 'templates/home.html',
+                controller: 'MainController',
+                controllerAs: 'mc'
+            });
+
+
         location.html5Mode(true);
     }
 
@@ -15,10 +23,18 @@
     function MainController(Socket) {
         var mc = this;
         mc.map;
-        Socket.connect('http://localhost:3000')
-        Socket.addListEvent('PinEvent')
-        Socket.on('PinEvent',function(message){
-            console.log(123,message)
-        })
+
+        init()
+
+        /////////
+
+        function init() {
+            Socket.connect('http://localhost:3000')
+            Socket.addListEvent('PinEvent')
+            Socket.on('PinEvent', function (message) {
+                console.log(123, message)
+            })
+        }
+        
     }
 })()

@@ -7,15 +7,8 @@
         .controller('GoogleController',GoogleController)
 
 
-    GoogleConfig.$inject = ['$routeProvider','uiGmapGoogleMapApiProvider']
-    function GoogleConfig(route,GoogleMapsConfig) {
-        route
-            .when('/', {
-                templateUrl: 'templates/home.html',
-                controller: 'GoogleController',
-                controllerAs: 'gc'
-            });
-
+    GoogleConfig.$inject = ['uiGmapGoogleMapApiProvider']
+    function GoogleConfig(GoogleMapsConfig) {
         GoogleMapsConfig.configure({
             key: 'AIzaSyCsIhWQ9rLxC8UCpiKt5gies1N80io_gTs',
             v: '3.20',
@@ -27,7 +20,8 @@
 
     GoogleController.$inject = ['uiGmapGoogleMapApi','PinService']
     function GoogleController(GoogleMap,PinService){
-        var gc = this
+        var gc = this;
+        gc.select = select;
         
         init()
         
@@ -35,7 +29,6 @@
         
         
         function init(){
-
             gc.map = {
                 dragZoom: {options: {}},
                 center: {
@@ -49,12 +42,16 @@
                     'click':function(mapModel, eventName, originalEventArgs){
                         var pin = {};
                         pin.lat = originalEventArgs[0].latLng.lat()
-                        pin.lng = originalEventArgs[0].latLng.lng()
-                        // if(gc.map.zoom < 15)
-                        //     gc.map.setZoomOnClick(18)
-                        // else
-                        console.log(gc.map.zoom)
-                        // PinService.add(pin)
+                        pin.long = originalEventArgs[0].latLng.lng()
+                        if(gc.pin) {
+                            pin.tipo = gc.pin
+                            if (gc.map.zoom < 15)
+                                console.log(gc.map)
+                            else
+                                PinService.add(pin)
+                        }else{
+                            console.log('Voce nao selecionou um pin')
+                        }
                     }
                 },
                 bounds: {}
@@ -76,6 +73,13 @@
                     }
                 }
             })
+        }
+
+        function select(id){
+            if(gc.pin == id)
+                gc.pin = null;
+            else
+                gc.pin = id;
         }
     }
 
