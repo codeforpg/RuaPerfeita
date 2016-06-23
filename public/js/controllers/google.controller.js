@@ -21,7 +21,9 @@
     GoogleController.$inject = ['uiGmapGoogleMapApi','PinService']
     function GoogleController(GoogleMap,PinService){
         var gc = this;
+        gc.pins = [];
         gc.select = select;
+        gc.addPin = addPin;
         
         init()
         
@@ -29,6 +31,11 @@
         
         
         function init(){
+            PinService.get()
+                .then(function(response){
+                    for(var i in response)
+                        gc.addPin(response[i])
+                })
             gc.map = {
                 dragZoom: {options: {}},
                 center: {
@@ -48,6 +55,7 @@
                             if (gc.map.zoom < 15)
                                 console.log(gc.map)
                             else
+                                gc.addPin(pin)
                                 PinService.add(pin)
                         }else{
                             console.log('Voce nao selecionou um pin')
@@ -74,6 +82,35 @@
                 }
             })
         }
+        function setIcon(tipo){
+            switch (tipo){
+                case 1:
+                    return 'icon/lombada.png'
+                    break;
+                case 2:
+                    return 'icon/nao_estacionamento.png'
+                    break;
+                case 3:
+                    return 'icon/nao_lombada.png'
+                    break;
+                case 4:
+                    return 'icon/nao_semaforo.png'
+                    break;
+                case 5:
+                    return 'icon/semaforo.png'
+                    break;
+            }
+        }
+
+        function addPin(pin){
+            var pin = {
+                lat:pin.lat,
+                lng:(pin.lng)?pin.lng:pin.long,
+                icon:setIcon(pin.tipo)
+            }
+            gc.pins.push(pin)
+        }
+
 
         function select(id){
             if(gc.pin == id)

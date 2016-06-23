@@ -14,7 +14,6 @@
 <div ng-view>
 
 </div>
-<script src="https://cdn.socket.io/socket.io-1.4.5.js"></script>
 <script src="node_modules/angular/angular.js"></script>
 <script src="node_modules/angular-route/angular-route.min.js"></script>
 <script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>

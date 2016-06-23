@@ -47,6 +47,16 @@
                                 pan="true"
                                 control="gc.map.control">
 
+                <ui-gmap-marker
+                        class="icon"
+                        ng-repeat="p in gc.pins" idKey="$index" coords="{latitude:p.lat,longitude:p.lng}" options="{icon:p.icon}">
+                    <ui-gmap-window isIconVisibleOnClick="true">
+                        <div>
+                            teste
+                        </div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+
             </ui-gmap-google-map>
         </div>
         <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
@@ -57,23 +67,23 @@
                     </a>
                 </li>
                 <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
-                    <a ng-click="gc.select(2)" >
-                        <img ng-class="{'active':gc.pin == 2}" src="img/semaforo.png" alt="semaforo">
-                    </a>
-                </li>
-                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
-                    <a ng-click="gc.select(3)" >
-                        <img ng-class="{'active':gc.pin == 3}" src="img/nao_semaforo.png" alt="nao_semaforo">
+                    <a ng-click="gc.select(5)" >
+                        <img ng-class="{'active':gc.pin == 5}" src="img/semaforo.png" alt="semaforo">
                     </a>
                 </li>
                 <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
                     <a ng-click="gc.select(4)" >
-                        <img ng-class="{'active':gc.pin == 4}" src="img/nao_lombada.png" alt="nao_lombada">
+                        <img ng-class="{'active':gc.pin == 4}" src="img/nao_semaforo.png" alt="nao_semaforo">
                     </a>
                 </li>
                 <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
-                    <a ng-click="gc.select(5)" >
-                        <img ng-class="{'active':gc.pin == 5}" src="img/nao_estacionamento.png" alt="nao_estacionamento">
+                    <a ng-click="gc.select(3)" >
+                        <img ng-class="{'active':gc.pin == 3}" src="img/nao_lombada.png" alt="nao_lombada">
+                    </a>
+                </li>
+                <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
+                    <a ng-click="gc.select(2)" >
+                        <img ng-class="{'active':gc.pin == 2}" src="img/nao_estacionamento.png" alt="nao_estacionamento">
                     </a>
                 </li>
             </ul>
