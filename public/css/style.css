@@ -132,6 +132,12 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
     cursor: pointer;
 }
 
+
+.comentarios{
+    max-height: 1000px;
+    min-height: 600px;
+}
+
 .container.main{
     padding-bottom: 20px;
     margin-top: 80px;
@@ -145,4 +151,5 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
     background: url("../img/fundo_pg.jpg") no-repeat fixed center;
     background-size: 100%;
 }
+
 

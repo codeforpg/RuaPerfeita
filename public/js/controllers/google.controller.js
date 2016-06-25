@@ -18,12 +18,13 @@
     }
 
 
-    GoogleController.$inject = ['uiGmapGoogleMapApi','PinService']
-    function GoogleController(GoogleMap,PinService){
+    GoogleController.$inject = ['uiGmapGoogleMapApi','PinService','$rootScope']
+    function GoogleController(GoogleMap,PinService,rootScope){
         var gc = this;
         gc.pins = [];
         gc.select = select;
         gc.addPin = addPin;
+        gc.showComentarios = showComentarios;
         
         init()
         
@@ -117,6 +118,11 @@
                 gc.pin = null;
             else
                 gc.pin = id;
+        }
+
+        function showComentarios(pin){
+            gc.comentarios = 'http://localhost:8000/comentarios/'+pin.lat;
+            console.log(gc.comentarios);
         }
     }
 

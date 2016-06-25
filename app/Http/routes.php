@@ -14,6 +14,9 @@
 Route::get('/', function () {
     return view('index');
 });
+Route::get('/comentarios/{id}', function ($id) {
+    return view('comentarios',compact('id'));
+});
 
 /*
 |--------------------------------------------------------------------------
