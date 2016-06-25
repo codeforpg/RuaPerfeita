@@ -1,6 +1,31 @@
 body {
-    font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif !important;
-    background-color: rgb(140, 141, 252) !important;
+    font-family: 'Poiret One', cursive !important;
+    background-color: #ffffff !important;
+    color: #000000;
+}
+
+.title{
+    font-family: 'Poiret One', cursive !important;
+}
+
+.no-border{
+    border: none !important;
+}
+
+.melhorias{
+    background-color: rgba(255,255,255,0.70) !important;
+    min-height: 600px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.mapa{
+    margin-top: 20px;
+}
+
+.header{
+    background-color: rgba(0,0,0,0.70) !important;
+    margin-bottom: 10px;
 }
 
 .angular-google-map-container {
@@ -109,10 +134,15 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 
 .container.main{
     padding-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 80px;
 }
 
 .container{
     background-color: rgb(240, 237, 229);
+}
+
+.cover{
+    background: url("../img/fundo_pg.jpg") no-repeat fixed center;
+    background-size: 100%;
 }
 

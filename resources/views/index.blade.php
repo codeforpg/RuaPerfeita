@@ -5,14 +5,59 @@
     <meta charset="UTF-8">
     <title>Rua Perfeita</title>
     <link rel="stylesheet" href="../node_modules/angular/angular-csp.css">
+    <link rel="stylesheet" href="/node_modules/material-design-lite/material.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
 </head>
-<body ng-cloak>
-
-<div ng-view>
-
+<body ng-cloak class="cover">
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent header">
+        <div class="mdl-layout__header-row">
+            <!-- Title -->
+            <span class="mdl-layout-title title">Rua Perfeita</span>
+            <!-- Add spacer, to align navigation to the right -->
+            <div class="mdl-layout-spacer"></div>
+            <!-- Navigation -->
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="javascript:void(0)" id="show-como-usar">Como Usar</a>
+                <a class="mdl-navigation__link" href="javascript:void(0)" id="show-tente-tambem">Tente Também</a>
+                <a class="mdl-navigation__link" href="">Acompanhe as votações</a>
+            </nav>
+        </div>
+    </header>
+    <main class="mdl-layout__content" ng-view>
+    </main>
+    <dialog class="col-md-5 no-border" id="como-usar">
+        <h4 class="mdl-dialog__title">Como Usar?</h4>
+        <div class="mdl-dialog__content">
+            <p>
+                <ul>
+                    <li><p>1 - Localize a rua que voce acha que precise de melhorias</p></li>
+                    <li><p>2 - Escolha sua na lista a direita</p></li>
+                    <li><p>3 - Clique no mapa para <strong>adicionar sua melhoria</strong></p></li>
+                </ul>
+            </p>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">Fechar</button>
+        </div>
+    </dialog>
+    <dialog class="col-md-5 no-border" id="tente-tambem">
+        <h4 class="mdl-dialog__title">Tente Também</h4>
+        <div class="mdl-dialog__content">
+            <ul>
+                <li><p>1 - Veja outras melhorias da cidade ou do seu bairro</p></li>
+                <li><p>2 - Click sobre elas</p></li>
+                <li><p>3 - <strong>Vote</strong> se está melhoria seria boa ou nao para aquela região</p></li>
+            </ul>
+        </div>
+        <div class="mdl-dialog__actions">
+            <button type="button" class="mdl-button close">Fechar</button>
+        </div>
+    </dialog>
 </div>
 <script src="node_modules/angular/angular.js"></script>
 <script src="node_modules/angular-route/angular-route.min.js"></script>
@@ -20,6 +65,7 @@
 <script src="node_modules/lodash/lodash.min.js"></script>
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+<script src="/node_modules/material-design-lite/material.min.js"></script>
 <script src="/lib/socket.io.js"></script>
 <script src="js/main.js"></script>
 <script src="js/provider/rua_perfeita.provider.js"></script>
@@ -27,5 +73,6 @@
 <script src="js/controllers/google.controller.js"></script>
 <script src="js/service/socket.service.js"></script>
 <script src="js/service/pin.service.js"></script>
+<script src="js/script.js"></script>
 </body>
 </html>

@@ -1,42 +1,8 @@
-<div class="container main" class="row">
-    <div class="col-lg-10">
-        <div class="page-header">
-            <h1>RuaPerfeita</h1>
-        </div>
-    </div>
-    <div class="col-lg-2 text-right">
-        <small>By: Code For PG</small>
-    </div>
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading" ng-click="comoUsar = !comoUsar">
-                <h3 class="panel-title cursor-pointer">Como usar</h3>
-            </div>
-            <div ng-show="comoUsar" class="panel-body">
-                <ul>
-                    <li><p>1 - Localize a rua que voce acha que precise de melhorias</p></li>
-                    <li><p>2 - Escolha sua na lista a direita</p></li>
-                    <li><p>3 - Clique no mapa para <strong>adicionar sua melhoria</strong></p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-12">
-        <div class="panel panel-default">
-            <div class="panel-heading" ng-click="tenteTambem = !tenteTambem">
-                <h3 class="panel-title cursor-pointer">Tente também</h3>
-            </div>
-            <div ng-show="tenteTambem" class="panel-body">
-                <ul>
-                    <li><p>1 - Veja outras melhorias da cidade ou do seu bairro</p></li>
-                    <li><p>2 - Click sobre elas</p></li>
-                    <li><p>3 - <strong>Vote</strong> se está melhoria seria boa ou nao para aquela região</p></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+
+
+<div class="main" class="row">
     <div class="map" data-ng-controller="GoogleController as gc">
-        <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12">
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 mapa">
             <ui-gmap-google-map class="map"
                                 center="gc.map.center"
                                 zoom="gc.map.zoom"
@@ -59,8 +25,9 @@
 
             </ui-gmap-google-map>
         </div>
-        <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12">
-            <ul class="col-lg-12">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <ul class="col-lg-12 melhorias">
+                <h3 class="text-center">Escolha uma melhoria</h3>
                 <li class="col-md-12 col-lg-12 col-sm-3 col-xs-6">
                     <a ng-click="gc.select(1)" >
                         <img ng-class="{'active':gc.pin == 1}" src="img/lombada.png" alt="lombada">
@@ -87,14 +54,7 @@
                     </a>
                 </li>
             </ul>
+
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
 </div>
-<footer class="footer">
-    <div class="container text-center">
-        <p class="text-muted"><a target="_blank" href="https://github.com/codeforpg">on GitHub</a> https://github.com/codeforpg</p>
-    </div>
-</footer>
