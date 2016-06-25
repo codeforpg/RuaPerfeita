@@ -11,6 +11,23 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/style.css">
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="node_modules/lodash/lodash.min.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
+    <script src="/node_modules/material-design-lite/material.min.js"></script>
+    <script src="/lib/socket.io.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/provider/rua_perfeita.provider.js"></script>
+    <script src="js/controllers/main.controller.js"></script>
+    <script src="js/controllers/google.controller.js"></script>
+    <script src="js/service/socket.service.js"></script>
+    <script src="js/service/pin.service.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body ng-cloak class="cover">
 <div class="demo-layout-transparent mdl-layout mdl-js-layout">
@@ -35,44 +52,30 @@
         <div class="mdl-dialog__content">
             <p>
                 <ul>
-                    <li><p>1 - Localize a rua que voce acha que precise de melhorias</p></li>
-                    <li><p>2 - Escolha sua na lista a direita</p></li>
-                    <li><p>3 - Clique no mapa para <strong>adicionar sua melhoria</strong></p></li>
+                    <li><p class="como-usar">1 - Localize a rua que voce acha que precise de melhorias</p class="como-usar"></li>
+                    <li><p class="como-usar">2 - Escolha sua melhoria na lista à direita</p></li>
+                    <li><p class="como-usar">3 - Clique no mapa para <strong>adicionar sua melhoria</strong></p></li>
                 </ul>
             </p>
         </div>
         <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button close">Fechar</button>
+            <button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect close">Fechar</button>
         </div>
     </dialog>
     <dialog class="col-md-5 no-border" id="tente-tambem">
         <h4 class="mdl-dialog__title">Tente Também</h4>
         <div class="mdl-dialog__content">
             <ul>
-                <li><p>1 - Veja outras melhorias da cidade ou do seu bairro</p></li>
-                <li><p>2 - Click sobre elas</p></li>
-                <li><p>3 - <strong>Vote</strong> se está melhoria seria boa ou nao para aquela região</p></li>
+                <li><p class="como-usar">1 - Veja outras melhorias da cidade ou do seu bairro</p></li>
+                <li><p class="como-usar">2 - Clique sobre elas</p></li>
+                <li><p class="como-usar">3 - <strong>Vote</strong> se esta melhoria seria boa ou não para aquela região</p></li>
             </ul>
         </div>
         <div class="mdl-dialog__actions">
-            <button type="button" class="mdl-button close">Fechar</button>
+            <button type="button" class="mdl-button mdl-js-button mdl-js-ripple-effect close">Fechar</button>
         </div>
     </dialog>
 </div>
-<script src="node_modules/angular/angular.js"></script>
-<script src="node_modules/angular-route/angular-route.min.js"></script>
-<script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>
-<script src="node_modules/lodash/lodash.min.js"></script>
-<script src="node_modules/jquery/dist/jquery.min.js"></script>
-<script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-<script src="/node_modules/material-design-lite/material.min.js"></script>
-<script src="/lib/socket.io.js"></script>
-<script src="js/main.js"></script>
-<script src="js/provider/rua_perfeita.provider.js"></script>
-<script src="js/controllers/main.controller.js"></script>
-<script src="js/controllers/google.controller.js"></script>
-<script src="js/service/socket.service.js"></script>
-<script src="js/service/pin.service.js"></script>
-<script src="js/script.js"></script>
+
 </body>
 </html>
