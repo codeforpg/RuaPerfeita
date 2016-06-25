@@ -16,4 +16,4 @@
     }(document, 'script', 'facebook-jssdk'));
 
 </script>
-<div class="fb-comments" data-width="350" data-href="{{'http://localhost:8000/'.$id}}" data-numposts="5"></div>
+<div class="fb-comments" data-width="100%" data-href="{{'http://localhost:8000/'.$id}}" data-numposts="5"></div>
