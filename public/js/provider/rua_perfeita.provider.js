@@ -6,7 +6,7 @@
         .provider('RuaPerfeita',RuaPerfeitaProvider)
 
     function RuaPerfeitaProvider(){
-        var _url = 'http://localhost:8000/'
+        var _url = base_url;
 
         this.setUrl = function (url){
             if(typeof url == 'string')

@@ -13,6 +13,10 @@
     <link href='https://fonts.googleapis.com/css?family=Poiret+One' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
 
+    <script>
+      var base_url = '{{ route("index") }}/';
+    </script>
+
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-route/angular-route.min.js"></script>
     <script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>

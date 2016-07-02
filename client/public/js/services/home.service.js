@@ -14,7 +14,7 @@
             votar: votar
         }
 
-        var _url = 'http://localhost:8000/'
+        var _url = base_url;
 
         return service;
 
