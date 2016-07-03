@@ -25,12 +25,84 @@
         gc.select = select;
         gc.addPin = addPin;
         gc.showComentarios = showComentarios;
-        
+
+        gc.plates = [
+          {
+            'name': 'Bicicletário'
+            , 'img_path': 'bicicletario.png'
+          }
+
+          , {
+            'name': 'Bicicletário coberto'
+            , 'img_path': 'bicicletario_coberto.png'
+          }
+
+          , {
+            'name': 'Estacionamento'
+            , 'img_path': 'estacionamento.png'
+          }
+
+          , {
+            'name': 'Faixa de pedestres'
+            , 'img_path': 'faixa_pedestre.png'
+          }
+
+          , {
+            'name': 'Lombada'
+            , 'img_path': 'lombada.png'
+          }
+
+          , {
+            'name': 'Lombada retirada'
+            , 'img_path': 'lombada_retirada.png'
+          }
+
+          , {
+            'name': 'Não estacionamento'
+            , 'img_path': 'nao_estacionamento.png'
+          }
+
+          , {
+            'name': 'Não lombada'
+            , 'img_path': 'nao_lombada.png'
+          }
+
+          , {
+            'name': 'Não semaforo'
+            , 'img_path': 'nao_semaforo.png'
+          }
+
+          , {
+            'name': 'Ponto de ônibus'
+            , 'img_path': 'ponto_onibus.png'
+          }
+
+          , {
+            'name': 'Proibido conversão à direita'
+            , 'img_path': 'proibido_conversao_direita.png'
+          }
+
+          , {
+            'name': 'Proibido conversão à esquerda'
+            , 'img_path': 'proibido_conversao_esquerda.png'
+          }
+
+          , {
+            'name': 'Proibido estacionar'
+            , 'img_path': 'proibido_estacionar.png'
+          }
+
+          , {
+            'name': 'Proibido estacionar e para'
+            , 'img_path': 'proibido_estacionar_parar.png'
+          }
+        ];
+
         init()
-        
+
         //////////
-        
-        
+
+
         function init(){
             PinService.get()
                 .then(function(response){
@@ -65,7 +137,7 @@
                 },
                 bounds: {}
             };
-            
+
             GoogleMap.then(function(){
                 gc.map.dragZoom = {
                     options: {
@@ -112,12 +184,12 @@
             gc.pins.push(pin)
         }
 
-
-        function select(id){
-            if(gc.pin == id)
-                gc.pin = null;
-            else
-                gc.pin = id;
+        function select(id) {
+          if(gc.pin == id) {
+            gc.pin = null;
+          } else {
+            gc.pin = id;
+          }
         }
 
         function showComentarios(pin){
@@ -125,5 +197,4 @@
             console.log(gc.comentarios);
         }
     }
-
-})()
+})();
