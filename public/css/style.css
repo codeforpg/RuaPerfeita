@@ -4,6 +4,11 @@ body {
     color: #000000;
 }
 
+img {
+  display: block;
+  max-width: 100%;
+}
+
 .mdl-navigation__link {
     font-size: 20px;
 }
@@ -195,4 +200,14 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
     background-size: 100%;
 }
 
+.melhorias-title {
+  margin-bottom: 30px;
+}
 
+.melhorias-item {
+  margin-bottom: 20px;
+}
+
+.melhorias-item--inactive {
+  opacity: .3;
+}
