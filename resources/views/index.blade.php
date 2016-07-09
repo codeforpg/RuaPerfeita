@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="../node_modules/angular/angular-csp.css">
     <link rel="stylesheet" href="/node_modules/material-design-lite/material.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="node_modules/ng-toast/dist/ngToast.css">
+    <link rel="stylesheet" href="node_modules/ng-dialog/css/ngDialog.css">
+    <link rel="stylesheet" href="node_modules/ng-dialog/css/myth/ngDialog-theme-plain.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-theme.css">
     <link rel="stylesheet" href="css/style.css">
@@ -18,12 +21,17 @@
     </script>
 
     <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="node_modules/angular-cookies/angular-cookies.js"></script>
     <script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="node_modules/lodash/lodash.min.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
-    <script src="/node_modules/material-design-lite/material.min.js"></script>
+    <script src="node_modules/material-design-lite/material.min.js"></script>
+    <script src="node_modules/ng-toast/dist/ngToast.js"></script>
+    <script src="node_modules/ng-dialog/js/ngDialog.js"></script>
     <script src="/lib/socket.io.js"></script>
     <script src="js/main.js"></script>
     <script src="js/provider/rua_perfeita.provider.js"></script>
@@ -49,6 +57,7 @@
             </nav>
         </div>
     </header>
+    <toast></toast>
     <main class="mdl-layout__content" ng-view>
     </main>
     <dialog class="col-md-5 no-border" id="como-usar">
@@ -56,7 +65,7 @@
         <div class="mdl-dialog__content">
             <p>
                 <ul>
-                    <li><p class="como-usar">1 - Localize a rua que voce acha que precise de melhorias</p class="como-usar"></li>
+                    <li><p class="como-usar">1 - Localize a rua que voce acha que precise de melhorias</p></li>
                     <li><p class="como-usar">2 - Escolha sua melhoria na lista à direita</p></li>
                     <li><p class="como-usar">3 - Clique no mapa para <strong>adicionar sua melhoria</strong></p></li>
                 </ul>
@@ -80,6 +89,5 @@
         </div>
     </dialog>
 </div>
-
 </body>
 </html>

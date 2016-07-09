@@ -9,6 +9,7 @@
     function PinService(http,RuaPerfeita){
         this.add = add;
         this.get = get;
+        this.update = update;
         var _error = _error,
             _url = RuaPerfeita.urlBase+'pin/'
 
@@ -23,6 +24,13 @@
         
         function get(){
             return http.get(_url)
+                .then(function(response){
+                    return response.data;
+                })
+        }
+
+        function update(pin){
+            return http.put(_url+pin.id_pin,pin)
                 .then(function(response){
                     return response.data;
                 })

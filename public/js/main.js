@@ -4,7 +4,11 @@
     angular
         .module('app',[
             'ngRoute',
-            'uiGmapgoogle-maps'
+            'uiGmapgoogle-maps',
+            'ngToast',
+            'ngAnimate',
+            'ngDialog',
+            'ngCookies'
         ])
     
 })()

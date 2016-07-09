@@ -29,7 +29,7 @@
         /////////
 
         function init() {
-            Socket.connect('http://192.168.1.49:3000')
+            Socket.connect('http://localhost:3000')
             Socket.addListEvent('PinEvent')
             Socket.on('PinEvent', function (message) {
                 console.log(123, message)

@@ -159,10 +159,26 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
     cursor: pointer;
 }
 
+.margin-top{
+    margin-top: 10px;
+}
+.margin-top-20{
+    margin-top: 20px;
+}
+
+.text-center{
+    padding: 5px;
+}
+
 
 .comentarios{
     max-height: 1000px;
-    min-height: 600px;
+    min-height: 530px;
+}
+
+.ng-toast__message span{
+    font-size: 21px;
+    font-weight: bold;
 }
 
 .container.main{
