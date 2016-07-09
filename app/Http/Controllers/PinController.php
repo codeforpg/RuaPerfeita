@@ -41,10 +41,12 @@ class PinController extends Controller
     {
         $pin = new Pin();
         if($request->voto > 0 ){
-            $pin->find($id)->increment('voto');
+            $msg = ['success','voto decrementado'];
+            $new_pin = $pin->find($id)->increment('voto');
         }elseif($request->voto < 0){
-            $pin->find($id)->decrement('voto');
+            $msg = ['success','voto incrementado'];
+            $new_pin = $pin->find($id)->decrement('voto');
         }
-        return 'Sucesso';
+        return [$msg,'pin'=>$pin->find($id)];
     }
 }

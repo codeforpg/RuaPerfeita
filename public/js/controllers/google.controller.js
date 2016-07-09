@@ -93,7 +93,7 @@
 
                             }
                         } else {
-                            if (c == 10) {
+                            if ((c % 4) == 0 && c != 0) {
                                 toast.create({
                                     className: 'info',
                                     content: 'Caso estaja com duvida use o menu \'Como Usar\' aqui em cima'
@@ -150,7 +150,8 @@
                 lat: pin.lat,
                 lng: (pin.lng) ? pin.lng : pin.long,
                 icon: setIcon(pin.tipo),
-                id_pin: pin.id_pin
+                id_pin: pin.id_pin,
+                voto:(pin.voto)?pin.voto:0
             }
             gc.pins.push(temp_pin)
         }
@@ -183,7 +184,14 @@
                             className: 'info',
                             content: 'Voto desfeito'
                         });
-                        PinService.update()
+                        var update_pin = {
+                            id_pin: todos_votos[i].id_pin,
+                            voto: 1
+                        }
+                        PinService.update(update_pin)
+                            .then(function(response){
+                                gc.pin_select = response.pin
+                            })
                     }else if(todos_votos[i].id_pin == pin.id_pin && todos_votos[i].type != '-'){
                         todos_votos.splice(todos_votos.indexOf(todos_votos[i]),1);
                         acao_voto = true;
@@ -195,6 +203,15 @@
                             className: 'success',
                             content: 'Obrigado por votar'
                         });
+                        var update_pin = {
+                            id_pin: todos_votos[i].id_pin,
+                            voto: -1
+                        }
+                        PinService.update(update_pin)
+                        PinService.update(update_pin)
+                            .then(function(response){
+                                gc.pin_select = response.pin
+                            })
                     }
                 }
                 if(search != '')
@@ -210,6 +227,14 @@
                     className: 'success',
                     content: 'Obrigado por votar'
                 });
+                var update_pin = {
+                    id_pin: pin.id_pin,
+                    voto: -1
+                }
+                PinService.update(update_pin)
+                    .then(function(response){
+                        gc.pin_select = response.pin
+                    })
             }
             $cookie.put('voto', JSON.stringify(todos_votos))
         }
@@ -229,6 +254,14 @@
                             className: 'info',
                             content: 'Voto desfeito'
                         });
+                        var update_pin = {
+                            id_pin: todos_votos[i].id_pin,
+                            voto: -1
+                        }
+                        PinService.update(update_pin)
+                            .then(function(response){
+                                gc.pin_select = response.pin
+                            })
                     }else if(todos_votos[i].id_pin == pin.id_pin && todos_votos[i].type != '+'){
                         todos_votos.splice(todos_votos.indexOf(todos_votos[i]),1);
                         acao_voto = true;
@@ -241,6 +274,15 @@
                             className: 'success',
                             content: 'Obrigado por votar'
                         });
+                        var update_pin = {
+                            id_pin: todos_votos[i].id_pin,
+                            voto: 1
+                        }
+                        PinService.update(update_pin)
+                        PinService.update(update_pin)
+                            .then(function(response){
+                                gc.pin_select = response.pin
+                            })
                     }
                 }
                 if(search != '')
@@ -256,8 +298,17 @@
                     className: 'success',
                     content: 'Obrigado por votar'
                 });
+                var update_pin = {
+                    id_pin: pin.id_pin,
+                    voto: 1
+                }
+                PinService.update(update_pin)
+                    .then(function(response){
+                        gc.pin_select = response.pin
+                    })
             }
             $cookie.put('voto', JSON.stringify(todos_votos))
+            console.log(gc.pin_select);
         }
     }
 
