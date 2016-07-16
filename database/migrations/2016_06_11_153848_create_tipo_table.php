@@ -15,7 +15,6 @@ class CreateTipoTable extends Migration {
             $table->increments('id_tipo');
             $table->string('nome');
             $table->string('imagem');
-            $table->integer('categoria');
             $table->timestamps();
         });
     }

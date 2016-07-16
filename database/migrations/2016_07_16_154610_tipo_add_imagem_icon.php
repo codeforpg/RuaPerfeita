@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class ForeingKeyTipoCategoria extends Migration
+class tipoAddImagemIcon extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class ForeingKeyTipoCategoria extends Migration
      */
     public function up()
     {
-        Schema::table('tipo', function($table) {
-            $table->foreign('categoria')->references('id_categoria')->on('categoria');
+        Schema::table('tipo',function($table){
+            $table->string('imagem_icon')->nullable();
         });
     }
 
@@ -24,6 +24,8 @@ class ForeingKeyTipoCategoria extends Migration
      */
     public function down()
     {
-        Schema::dropForeign('tipo_categoria_foreign');
+        Schema::table('tipo',function($table){
+            $table->dropColumn('imagem_icon');
+        });
     }
 }

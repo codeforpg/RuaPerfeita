@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePinTable extends Migration
+class Propriedades extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class CreatePinTable extends Migration
      */
     public function up()
     {
-        Schema::create('pin', function(Blueprint $table) {
-            $table->increments('id_pin');
-            $table->string('lat');
-            $table->string('long');
+        Schema::create('propriedades', function(Blueprint $table) {
+            $table->increments('id_propriedade');
             $table->integer('tipo');
-            $table->timestamp('expire_at')->nullable();
+            $table->foreign('tipo')->references('id_tipo')->on('tipo')->onDelete('cascade');
+            $table->string('descricao');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreatePinTable extends Migration
      */
     public function down()
     {
-        Schema::drop('pin');
+        //
     }
 }

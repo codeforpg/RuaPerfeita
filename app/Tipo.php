@@ -9,5 +9,5 @@ class Tipo extends Model
     public $table = 'tipo';
     public $primaryKey = 'id_tipo';
 
-//    public $fillable = ['lat', 'long', 'tipo', 'expire_at'];
+    public $fillable = ['nome', 'tipo', 'imagem','imagem_icon'];
 }
