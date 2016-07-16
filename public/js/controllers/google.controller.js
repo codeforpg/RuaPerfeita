@@ -56,7 +56,7 @@
                     longitude: -50.1583220
                 },
                 pan: true,
-                zoom: 14,
+                zoom: 16,
                 refresh: false,
                 events: {
                     'click': function (mapModel, eventName, originalEventArgs) {

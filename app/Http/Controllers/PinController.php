@@ -15,7 +15,7 @@ class PinController extends Controller
 {
     public function index() {
         $pin = new Pin();
-        return $pin->where('expire_at', '>', Carbon::now()->toDateString())->orWhere('voto', '>', 2)->get();
+        return $pin->get();
 
     }
 
