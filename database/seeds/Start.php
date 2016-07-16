@@ -16,8 +16,8 @@ class Start extends Seeder
             
             $tipo = \App\Tipo::create([
                 'nome' => 'Radar',
-                'imagem' => '/public/img/radar.png',
-                'imagem_icon' => '/public/icon/radar.png'
+                'imagem' => '/img/radar.png',
+                'imagem_icon' => '/icon/radar.png'
             ]);
 
             \App\Propriedade::create([
@@ -51,8 +51,8 @@ class Start extends Seeder
 
             $tipo = \App\Tipo::create([
                 'nome' => 'Faixa Elevada',
-                'imagem' => '/public/img/faixa_elevada.png',
-                'imagem_icon' => '/public/icon/faixa_elevada.png'
+                'imagem' => '/img/faixa_elevada.png',
+                'imagem_icon' => '/icon/faixa_elevada.png'
             ]);
             \App\Propriedade::create([
                 'tipo' => $tipo->id_tipo,
@@ -62,8 +62,8 @@ class Start extends Seeder
 
             $tipo = \App\Tipo::create([
                 'nome' => 'Semaforo',
-                'imagem' => '/public/img/semaforo.png',
-                'imagem_icon' => '/public/icon/semaforo.png'
+                'imagem' => '/img/semaforo.png',
+                'imagem_icon' => '/icon/semaforo.png'
             ]);
             \App\Propriedade::create([
                 'tipo' => $tipo->id_tipo,
@@ -93,8 +93,8 @@ class Start extends Seeder
 
             $tipo = \App\Tipo::create([
                 'nome' => 'Lombada',
-                'imagem' => '/public/img/lombada.png',
-                'imagem_icon' => '/public/icon/lombada.png'
+                'imagem' => '/img/lombada.png',
+                'imagem_icon' => '/icon/lombada.png'
             ]);
             \App\Propriedade::create([
                 'tipo' => $tipo->id_tipo,
@@ -108,8 +108,8 @@ class Start extends Seeder
 
             $tipo = \App\Tipo::create([
                 'nome' => 'Rotatoria',
-                'imagem' => '/public/img/rotatoria.png',
-                'imagem_icon' => '/public/icon/rotatoria.png'
+                'imagem' => '/img/rotatoria.png',
+                'imagem_icon' => '/icon/rotatoria.png'
             ]);
             \App\Propriedade::create([
                 'tipo' => $tipo->id_tipo,
@@ -140,7 +140,7 @@ class Start extends Seeder
                             $tipo_table = \App\Tipo::where('nome', 'Faixa Elevada')->first();
                             $tipo = $tipo_table->id_tipo;
                             break;
-                        case 'Semaforo':
+                        case 'Semafaro':
                             $tipo_table = \App\Tipo::where('nome', 'Semaforo')->first();
                             $tipo = $tipo_table->id_tipo;
                             break;

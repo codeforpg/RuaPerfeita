@@ -46,6 +46,7 @@
             var c = 0 // contador quantas vezes clicou sem selecionar um pin
             PinService.get()
                 .then(function (response) {
+                    console.log(response);
                     for (var i in response)
                         gc.addPin(response[i])
                 })
@@ -149,7 +150,7 @@
             var temp_pin = {
                 lat: pin.lat,
                 lng: (pin.lng) ? pin.lng : pin.long,
-                icon: setIcon(pin.tipo),
+                icon: pin.imagem_icon,
                 id_pin: pin.id_pin,
                 voto:(pin.voto)?pin.voto:0
             }
