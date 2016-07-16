@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Voto;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;

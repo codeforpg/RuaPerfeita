@@ -14,7 +14,7 @@ class CreateVotosTable extends Migration {
         Schema::create('votos', function(Blueprint $table) {
             $table->increments('id_voto');
             $table->integer('valor');
-            //$table->foreign('pin')->references('id_pin')->on('pin')->onDelete('cascade');
+            $table->foreign('id_pin')->references('id_pin')->on('pin')->onDelete('cascade');
             $table->timestamps();
         });
     }
