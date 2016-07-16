@@ -9,6 +9,11 @@ img {
   max-width: 100%;
 }
 
+.no-margin{
+    margin: 0;
+    padding: 0;
+}
+
 .mdl-navigation__link {
     font-size: 20px;
 }

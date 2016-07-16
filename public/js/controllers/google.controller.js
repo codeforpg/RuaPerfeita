@@ -46,7 +46,6 @@
             var c = 0 // contador quantas vezes clicou sem selecionar um pin
             PinService.get()
                 .then(function (response) {
-                    console.log(response);
                     for (var i in response)
                         gc.addPin(response[i])
                 })
