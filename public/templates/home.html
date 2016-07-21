@@ -244,14 +244,20 @@
                                 pan="true"
                                 control="gc.map.control">
 
+
+                <ui-gmap-search-box
+                        template='gc.template'
+                        events='gc.search'>
+                </ui-gmap-search-box>
+
                 <ui-gmap-marker
                         class="icon"
-                        ng-repeat="p in gc.pins" idKey="$index" coords="{latitude:p.lat,longitude:p.lng}" options="{icon:p.icon}">
-                    <ui-gmap-window isIconVisibleOnClick="true">
-                        <div>
-                            <button data-ng-click="$parent.gc.showComentarios($parent.p)">Detalhes</button>
-                        </div>
-                    </ui-gmap-window>
+                        ng-repeat="p in gc.pins"
+                        idKey="p.id_pin"
+                        coords="{latitude:p.lat,longitude:p.lng}"
+                        control="p"
+                        options="{icon:p.icon}"
+                        click="gc.showComentarios">
                 </ui-gmap-marker>
 
             </ui-gmap-google-map>

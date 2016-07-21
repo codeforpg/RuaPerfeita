@@ -62,11 +62,11 @@
         function init() {
             mc.range = 50;
             mc.old_range = 50;
-            Socket.connect('http://localhost:3000')
-            Socket.addListEvent('PinEvent')
-            Socket.on('PinEvent', function (message) {
-                console.log(123, message)
-            })
+            // Socket.connect('http://localhost:3000')
+            // Socket.addListEvent('PinEvent')
+            // Socket.on('PinEvent', function (message) {
+            //     console.log(123, message)
+            // })
         }
         
     }

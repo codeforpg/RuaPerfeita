@@ -36,6 +36,7 @@
         gc.downVote = downVote;
         gc.upVote = upVote;
         gc.showComentarios = showComentarios;
+        gc.search = search;
 
         init()
 
@@ -49,6 +50,7 @@
                     for (var i in response)
                         gc.addPin(response[i])
                 })
+            gc.template = 'templates/search.html'
             gc.map = {
                 dragZoom: {options: {}},
                 center: {
@@ -60,6 +62,7 @@
                 refresh: false,
                 events: {
                     'click': function (mapModel, eventName, originalEventArgs) {
+                        console.log(eventName);
                         var pin = {};
                         pin.lat = originalEventArgs[0].latLng.lat()
                         pin.long = originalEventArgs[0].latLng.lng()
@@ -156,6 +159,9 @@
             gc.pins.push(temp_pin)
         }
 
+        function search(){
+            console.log('ok')
+        }
 
         function select(id) {
             if (gc.pin == id)
@@ -164,9 +170,9 @@
                 gc.pin = id;
         }
 
-        function showComentarios(pin) {
-            gc.pin_select = pin;
-            gc.comentarios = 'http://localhost:8000/comentarios/' + pin.id_pin;
+        function showComentarios(mapModel, eventName, originalEventArgs) {
+            gc.pin_select = originalEventArgs.control;
+            gc.comentarios = 'http://localhost:8000/comentarios/' + originalEventArgs.control.id_pin;
         }
 
         function downVote(pin) {

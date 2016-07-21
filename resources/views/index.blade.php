@@ -27,11 +27,11 @@
     <script src="node_modules/angular-cookies/angular-cookies.js"></script>
     <script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="node_modules/lodash/lodash.min.js"></script>
-    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
     <script src="node_modules/material-design-lite/material.min.js"></script>
     <script src="node_modules/ng-toast/dist/ngToast.js"></script>
     <script src="node_modules/ng-dialog/js/ngDialog.js"></script>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="/lib/socket.io.js"></script>
     <script src="js/main.js"></script>
     <script src="js/provider/rua_perfeita.provider.js"></script>
