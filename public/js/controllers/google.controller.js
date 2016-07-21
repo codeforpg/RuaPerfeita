@@ -36,7 +36,6 @@
         gc.downVote = downVote;
         gc.upVote = upVote;
         gc.showComentarios = showComentarios;
-        gc.search = search;
 
         init()
 
@@ -157,10 +156,6 @@
                 voto:(pin.voto)?pin.voto:0
             }
             gc.pins.push(temp_pin)
-        }
-
-        function search(){
-            console.log('ok')
         }
 
         function select(id) {
@@ -314,7 +309,6 @@
                     })
             }
             $cookie.put('voto', JSON.stringify(todos_votos))
-            console.log(gc.pin_select);
         }
     }
 

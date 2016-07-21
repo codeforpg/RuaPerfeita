@@ -15,9 +15,8 @@ class VotoController extends Controller
 
         if ($voto) {
             return $voto;
-        } else {
-            return 'voto nao encontrado';
         }
+        return 'voto nao encontrado';
     }
 
     public function store(Request $request) {

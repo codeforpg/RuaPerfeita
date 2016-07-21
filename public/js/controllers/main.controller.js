@@ -19,8 +19,8 @@
         location.html5Mode(true);
     }
 
-    MainController.$inject = ['SocketService']
-    function MainController(Socket) {
+    MainController.$inject = ['SocketService','TipoService']
+    function MainController(Socket,Tipo) {
         var mc = this;
         var time;
         mc.map;
@@ -30,6 +30,23 @@
         init()
 
         /////////
+
+        function init() {
+
+            Tipo.all()
+                .then(function(response){
+                    console.log(response);
+                    mc.tipos = response;
+                })
+
+            mc.range = 50;
+            mc.old_range = 50;
+            // Socket.connect('http://localhost:3000')
+            // Socket.addListEvent('PinEvent')
+            // Socket.on('PinEvent', function (message) {
+            //     console.log(123, message)
+            // })
+        }
 
         function checkRange(range){
             console.log(range);
@@ -59,15 +76,5 @@
             mc.old_range = mc.range;
         }
 
-        function init() {
-            mc.range = 50;
-            mc.old_range = 50;
-            // Socket.connect('http://localhost:3000')
-            // Socket.addListEvent('PinEvent')
-            // Socket.on('PinEvent', function (message) {
-            //     console.log(123, message)
-            // })
-        }
-        
     }
 })()

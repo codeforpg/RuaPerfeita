@@ -62,4 +62,9 @@ class TipoController extends Controller
 
         return $result;
     }
+    
+    public function all()
+    {
+        return Tipo::all();
+    }
 }

@@ -39,6 +39,7 @@
     <script src="js/controllers/google.controller.js"></script>
     <script src="js/service/socket.service.js"></script>
     <script src="js/service/pin.service.js"></script>
+    <script src="js/service/tipo.service.js"></script>
     <script src="js/script.js"></script>
 </head>
 <body ng-cloak class="cover">
