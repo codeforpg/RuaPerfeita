@@ -15,7 +15,7 @@ class PinController extends Controller
 {
     public function index() {
         $pin = new Pin();
-        $result = $pin->join('tipo','tipo','=','id_tipo')->get();
+        $result =  $pin->leftJoin('tipo','tipo','=','id_tipo')->get();
         return $result;
 
     }
