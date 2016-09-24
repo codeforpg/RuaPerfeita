@@ -27,4 +27,4 @@
     }
 
 </script>
-<div class="fb-comments" data-width="100%" data-href="{{ 'http://localhost:8000/'.$id }}" data-numposts="5"></div>
+<div class="fb-comments" data-width="100%" data-href="{{ route('index').$id }}" data-numposts="5"></div>

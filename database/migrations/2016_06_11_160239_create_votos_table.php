@@ -15,7 +15,6 @@ class CreateVotosTable extends Migration {
             $table->increments('id_voto');
             $table->integer('valor');
             $table->integer('pin');
-            $table->foreign('pin')->references('id_pin')->on('pin')->onDelete('cascade');
             $table->timestamps();
         });
     }
