@@ -15,7 +15,6 @@ class Propriedades extends Migration
         Schema::create('propriedades', function(Blueprint $table) {
             $table->increments('id_propriedade');
             $table->integer('tipo');
-            $table->foreign('tipo')->references('id_tipo')->on('tipo')->onDelete('cascade');
             $table->string('descricao');
             $table->timestamps();
         });
