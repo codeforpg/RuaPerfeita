@@ -7,7 +7,7 @@
 
     TipoService.$inject = ['$http']
     function TipoService(http){
-        var _url = 'http://localhost:8000/tipo/'
+        var _url = base_url + '/tipo/'
         this.all = all;
         
         

@@ -167,7 +167,7 @@
 
         function showComentarios(mapModel, eventName, originalEventArgs) {
             gc.pin_select = originalEventArgs.control;
-            gc.comentarios = 'http://localhost:8000/comentarios/' + originalEventArgs.control.id_pin;
+            gc.comentarios = base_url + '/comentarios/' + originalEventArgs.control.id_pin;
         }
 
         function downVote(pin) {
