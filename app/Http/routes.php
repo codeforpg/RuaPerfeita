@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index');
+Route::get('/', ['as' => 'index', 'uses' => function () {
+  return view('index');
+}]);
+
+Route::get('/comentarios/{id}', function ($id) {
+  return view('comentarios',compact('id'));
 });
 
 /*
@@ -27,4 +31,8 @@ Route::get('/', function () {
 */
 
 Route::resource('pin', 'PinController', ['only' => ['index', 'store', 'update']]);
-Route::resource('resposta', 'RespostaController', ['only' => ['index', 'store', 'update']]);
+Route::resource('tipo', 'TipoController', ['only' => ['index', 'store', 'update']]);
+Route::resource('categoria', 'CategoriaController', ['only' => ['index', 'store', 'update']]);
+Route::resource('voto', 'VotoController', ['only' => ['index', 'store', 'update']]);
+
+Route::get('tipo/all','TipoController@all');

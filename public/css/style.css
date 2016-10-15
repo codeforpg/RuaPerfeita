@@ -1,6 +1,68 @@
 body {
-    font-family: Candara,Calibri,Segoe,Segoe UI,Optima,Arial,sans-serif !important;
-    background-color: rgb(140, 141, 252) !important;
+    font-family: 'Poiret One', cursive !important;
+    background-color: #ffffff !important;
+    color: #000000;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.no-margin{
+    margin: 0;
+    padding: 0;
+}
+
+.mdl-navigation__link {
+    font-size: 20px;
+}
+
+.como-usar{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.close{
+    font-family: 'Oswald', sans-serif !important;
+}
+
+.mdl-dialog__title {
+    font-size: 3.5rem;
+    font-weight: bold;
+}
+
+.title{
+    font-family: 'Poiret One', cursive !important;
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.no-border{
+    border: none !important;
+}
+
+.melhorias{
+    background-color: rgba(255,255,255,0.70) !important;
+    min-height: 600px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.facebook-comments{
+    background-color: rgba(255,255,255,1) !important;
+    min-height: 600px;
+    overflow-y: auto;
+    margin-top: 20px;
+}
+
+.mapa{
+    margin-top: 20px;
+}
+
+.header{
+    background-color: rgba(0,0,0,0.70) !important;
+    margin-bottom: 10px;
 }
 
 .angular-google-map-container {
@@ -14,6 +76,10 @@ body {
 }
 li{
     list-style: none;
+}
+
+a{
+    cursor: pointer;
 }
 
 .angular-google-map {
@@ -103,11 +169,50 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
     cursor: pointer;
 }
 
+.margin-top{
+    margin-top: 10px;
+}
+.margin-top-20{
+    margin-top: 20px;
+}
+
+.text-center{
+    padding: 5px;
+}
+
+
+.comentarios{
+    max-height: 1000px;
+    min-height: 530px;
+}
+
+.ng-toast__message span{
+    font-size: 21px;
+    font-weight: bold;
+}
+
 .container.main{
     padding-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 80px;
 }
 
 .container{
     background-color: rgb(240, 237, 229);
+}
+
+.cover{
+    background: url("../img/fundo_pg.jpg") no-repeat fixed center;
+    background-size: 100%;
+}
+
+.melhorias-title {
+  margin-bottom: 30px;
+}
+
+.melhorias-item {
+  margin-bottom: 20px;
+}
+
+.melhorias-item--inactive {
+  opacity: .3;
 }

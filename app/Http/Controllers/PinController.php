@@ -15,7 +15,8 @@ class PinController extends Controller
 {
     public function index() {
         $pin = new Pin();
-        return $pin->where('expire_at', '>', Carbon::now()->toDateString())->orWhere('voto', '>', 2)->get();
+        $result =  $pin->leftJoin('tipo','tipo','=','id_tipo')->get();
+        return $result;
 
     }
 
@@ -41,10 +42,12 @@ class PinController extends Controller
     {
         $pin = new Pin();
         if($request->voto > 0 ){
-            $pin->find($id)->increment('voto');
+            $msg = ['success','voto decrementado'];
+            $new_pin = $pin->find($id)->increment('voto');
         }elseif($request->voto < 0){
-            $pin->find($id)->decrement('voto');
+            $msg = ['success','voto incrementado'];
+            $new_pin = $pin->find($id)->decrement('voto');
         }
-        return 'Sucesso';
+        return [$msg,'pin'=>$pin->find($id)];
     }
 }
