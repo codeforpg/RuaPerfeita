@@ -26,8 +26,8 @@
     }
 
 
-    GoogleController.$inject = ['uiGmapGoogleMapApi', 'PinService', '$rootScope', 'ngToast', 'ngDialog', '$cookies']
-    function GoogleController(GoogleMap, PinService, rootScope, toast, Modal, $cookie) {
+    GoogleController.$inject = ['uiGmapGoogleMapApi', 'TipoService', 'PinService', '$rootScope', 'ngToast', 'ngDialog', '$cookies','$window']
+    function GoogleController(GoogleMap, TipoService, PinService, rootScope, toast, Modal, $cookie,$window) {
         var gc = this;
         gc.pins = [];
         gc.select = select;
@@ -49,6 +49,10 @@
                     for (var i in response)
                         gc.addPin(response[i])
                 })
+            TipoService.all()
+                .then(function (response) {
+                    gc.types = response;
+                })
             gc.template = 'templates/search.html'
             gc.map = {
                 dragZoom: {options: {}},
@@ -61,11 +65,15 @@
                 refresh: false,
                 events: {
                     'click': function (mapModel, eventName, originalEventArgs) {
-                        console.log(eventName);
+                        console.log(123);
                         var pin = {};
                         pin.lat = originalEventArgs[0].latLng.lat()
                         pin.long = originalEventArgs[0].latLng.lng()
-                        if (gc.pin) {
+                        $window.display_msg = false;
+                        if($window.sends){
+                            return false;
+                        }
+                        if (gc.pin ) {
                             pin.tipo = gc.pin
                             if (gc.map.zoom < 15)
                                 toast.create({
@@ -74,15 +82,16 @@
                                 });
                             else {
                                 if (typeof $cookie.get('pin') == 'string' && new Date($cookie.get('pin') * 1000) > new Date()) {
+                                    console.log('toast ');
                                     var diff = new Date($cookie.get('pin') * 1000).getTime() - new Date().getTime();
-                                    toast.create({
-                                        className: 'warning',
-                                        content: 'Aguarde ' + Math.round(Math.abs(diff / 1000)) + ' segundos para adicionar outra melhoria'
-                                    })
+
                                 } else {
                                     $cookie.put('pin', (new Date().setSeconds(new Date().getSeconds() + 30) / 1000))
+                                    $window.sends = true;
                                     PinService.add(pin)
                                         .then(function (response_pin) {
+                                            $window.sends = false;
+                                            console.log('fim');
                                             gc.addPin(response_pin)
                                             gc.select(response_pin.id)
                                             toast.create({
@@ -127,34 +136,15 @@
             })
         }
 
-        function setIcon(tipo) {
-            switch (tipo) {
-                case 1:
-                    return 'icon/lombada.png'
-                    break;
-                case 2:
-                    return 'icon/nao_estacionamento.png'
-                    break;
-                case 3:
-                    return 'icon/nao_lombada.png'
-                    break;
-                case 4:
-                    return 'icon/nao_semaforo.png'
-                    break;
-                case 5:
-                    return 'icon/semaforo.png'
-                    break;
-            }
-        }
-
         function addPin(pin) {
             var temp_pin = {
                 lat: pin.lat,
                 lng: (pin.lng) ? pin.lng : pin.long,
                 icon: pin.imagem_icon,
+                status: pin.id_pin_status,
                 id_pin: pin.id_pin,
                 voto:(pin.voto)?pin.voto:0
-            }
+            };
             gc.pins.push(temp_pin)
         }
 
@@ -167,12 +157,12 @@
 
         function showComentarios(mapModel, eventName, originalEventArgs) {
             gc.pin_select = originalEventArgs.control;
-            gc.comentarios = base_url + '/comentarios/' + originalEventArgs.control.id_pin;
+            gc.comentarios = base_url + 'comentarios/' + originalEventArgs.control.id_pin;
         }
 
         function downVote(pin) {
             var cookie = $cookie.get('voto');
-            var todos_votos = []
+            var todos_votos = [];
             var acao_voto = false;
             if(typeof cookie == 'string'){
                 todos_votos = JSON.parse(cookie);

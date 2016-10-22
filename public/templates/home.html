@@ -1,107 +1,54 @@
+<style>
+    li.item-list {
+        text-align: center;
+        text-align: center;
+        margin: 5px 0;
+        border-radius: 4px;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+</style>
+
 <div class="main" class="row">
     <div class="map" data-ng-controller="GoogleController as gc">
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
             <div class="col-lg-12 facebook-comments">
-                <div class="col-lg-1">
+                <div class="col-lg-2">
                     <ul class="no-margin" ng-init="tab = 1">
-                        <li>
+                        <li class="item-list">
                             <a ng-click="tab = 1">Melhorias</a>
                         </li>
-                        <li>
+                        <li class="item-list">
                             <a ng-click="tab = 2">Recentes</a>
                         </li>
-                        <li ng-show="gc.comentarios">
+                        <li class="item-list" ng-show="gc.comentarios">
                             <a ng-click="tab = 3">Descrição</a>
                         </li>
-                        <li ng-show="gc.comentarios">
+                        <li class="item-list" ng-show="gc.comentarios">
                             <a ng-click="tab = 4">Comentarios</a>
                         </li>
-                        <li ng-show="gc.comentarios">
+                        <li class="item-list" ng-show="gc.comentarios">
                             <a ng-click="tab = 5">Votos</a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-11" ng-show="tab == 1">
+                <div class="col-lg-10" ng-show="tab == 1">
                     <ul class="col-lg-12 melhorias">
                         <h1 class="text-center">Escolha uma melhoria</h1>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(1)" >
-                                <img ng-class="{'active':gc.pin == 1}" src="img/bicicletario.png" alt="lombada">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(5)" >
-                                <img ng-class="{'active':gc.pin == 5}" src="img/bicicletario_coberto.png" alt="semaforo">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(4)" >
-                                <img ng-class="{'active':gc.pin == 4}" src="img/estacionamento.png" alt="nao_semaforo">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(3)" >
-                                <img ng-class="{'active':gc.pin == 3}" src="img/faixa_pedestre.png" alt="nao_lombada">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/lombada.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/lombada_retirada.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/nao_estacionamento.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/nao_lombada.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/nao_semaforo.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/ponto_onibus.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/proibido_conversao_direita.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/proibido_conversao_esquerda.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/proibido_estacionar.png" alt="nao_estacionamento">
-                            </a>
-                        </li>
-                        <li class="col-md-3 col-lg-3 col-sm-3 col-xs-3">
-                            <a ng-click="gc.select(2)" >
-                                <img ng-class="{'active':gc.pin == 2}" src="img/proibido_estacionar_parar.png" alt="nao_estacionamento">
+                        <li class="col-md-3 col-sm-4 col-xs-12" ng-repeat="types in gc.types" ng-class="{'active':gc.pin == types.id_tipo}">
+                            <a ng-click="gc.select(types.id_tipo)" >
+                                <img ng-src="{{types.imagem}}" alt="{{ types.nome }}">
                             </a>
                         </li>
                     </ul>
                 </div>
-                <div class="col-lg-11" ng-show="tab == 4">
+                <div class="col-lg-10" ng-show="tab == 4">
                     <div class="margin-top">
                         <iframe class="col-lg-12 comentarios" src="{{ gc.comentarios }}" frameborder="0"></iframe>
                     </div>
                 </div>
-                <div class="col-lg-11" ng-show="tab == 5">
+                <div class="col-lg-10" ng-show="tab == 5">
                     <div class="col-lg-offset-2 col-lg-3">
                         <button ng-click="gc.downVote(gc.pin_select)" class="btn btn-block">-1</button>
                     </div>
