@@ -9,5 +9,5 @@ class Pin extends Model
     public $table = 'pin';
     public $primaryKey = 'id_pin';
 
-    public $fillable = ['lat', 'long', 'tipo', 'expire_at'];
+    public $fillable = ['lat', 'long', 'tipo', 'expire_at', 'id_pin_status'];
 }

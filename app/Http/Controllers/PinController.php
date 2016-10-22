@@ -33,6 +33,7 @@ class PinController extends Controller
         $pin = new Pin();
         $post = $request->all();
         $post['expire_at'] = Carbon::now()->addDay(30)->toDateTimeString();
+        $post['id_pin_status'] = 2;
         $newPin = $pin->create($post);
 
         return $newPin;

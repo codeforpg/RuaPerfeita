@@ -150,8 +150,6 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
     left: 118px;
 }
 .active{
-    border: 1px solid black;
-    border-radius: 13px;
     background-color: yellow;
 }
 
