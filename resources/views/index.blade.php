@@ -25,8 +25,8 @@
     <script src="node_modules/angular-sanitize/angular-sanitize.js"></script>
     <script src="node_modules/angular-route/angular-route.min.js"></script>
     <script src="node_modules/angular-cookies/angular-cookies.js"></script>
-    <script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="node_modules/lodash/lodash.min.js"></script>
+    <script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
     <script src="node_modules/material-design-lite/material.min.js"></script>
     <script src="node_modules/ng-toast/dist/ngToast.js"></script>

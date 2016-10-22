@@ -33,12 +33,6 @@
 
         function init() {
 
-            Tipo.all()
-                .then(function(response){
-                    console.log(response);
-                    mc.tipos = response;
-                })
-
             mc.range = 50;
             mc.old_range = 50;
             // Socket.connect('http://localhost:3000')
@@ -72,7 +66,6 @@
                     mc.range = 0;
                 }
             }
-            console.log(mc.range,mc.old_range)
             mc.old_range = mc.range;
         }
 
