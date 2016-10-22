@@ -36,7 +36,10 @@ class PinController extends Controller
         $post['id_pin_status'] = 2;
         $newPin = $pin->create($post);
 
-        return $newPin;
+        $pin = new Pin();
+        $result = $pin->where('id_pin','=',$newPin->id_pin)->leftJoin('tipo', 'tipo', '=', 'id_tipo')->first();
+
+        return $result;
     }
 
     public function update($id, Request $request)

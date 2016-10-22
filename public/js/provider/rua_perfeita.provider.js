@@ -6,7 +6,7 @@
         .provider('RuaPerfeita',RuaPerfeitaProvider)
 
     function RuaPerfeitaProvider(){
-        var _url = base_url;
+        var _url = '';
 
         this.setUrl = function (url){
             if(typeof url == 'string')

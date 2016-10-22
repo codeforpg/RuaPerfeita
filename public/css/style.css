@@ -214,3 +214,11 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 .melhorias-item--inactive {
   opacity: .3;
 }
+
+textarea {
+    resize: none;
+    font-weight: bold;
+    width: 100%;
+    height: 110px;
+}
+

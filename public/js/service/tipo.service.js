@@ -1,13 +1,13 @@
 (function(){
-    'use strict'
+    'use strict';
 
     angular
         .module('app')
-        .service('TipoService',TipoService)
+        .service('TipoService',TipoService);
 
-    TipoService.$inject = ['$http']
+    TipoService.$inject = ['$http'];
     function TipoService(http){
-        var _url = base_url + '/tipo/'
+        var _url = '/tipo/';
         this.all = all;
         
         

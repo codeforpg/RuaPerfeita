@@ -1,5 +1,5 @@
 (function () {
-    'use strict'
+    'use strict';
 
     angular
         .module('app')
@@ -26,8 +26,8 @@
     }
 
 
-    GoogleController.$inject = ['uiGmapGoogleMapApi', 'TipoService', 'PinService', '$rootScope', 'ngToast', 'ngDialog', '$cookies','$window']
-    function GoogleController(GoogleMap, TipoService, PinService, rootScope, toast, Modal, $cookie,$window) {
+    GoogleController.$inject = ['uiGmapGoogleMapApi', 'TipoService', 'PinService', '$rootScope', 'ngToast', 'ngDialog', '$cookies','$window','addPinService'];
+    function GoogleController(GoogleMap, TipoService, PinService, $rootScope, toast, Modal, $cookie,$window, addPinService) {
         var gc = this;
         gc.pins = [];
         gc.select = select;
@@ -52,8 +52,8 @@
             TipoService.all()
                 .then(function (response) {
                     gc.types = response;
-                })
-            gc.template = 'templates/search.html'
+                });
+            gc.template = 'templates/search.html';
             gc.map = {
                 dragZoom: {options: {}},
                 center: {
@@ -66,57 +66,61 @@
                 events: {
                     'click': function (mapModel, eventName, originalEventArgs) {
                         var pin = {};
-                        pin.lat = originalEventArgs[0].latLng.lat()
-                        pin.long = originalEventArgs[0].latLng.lng()
-                        $window.display_msg = false;
-                        if($window.sends){
-                            return false;
-                        }
-                        if (gc.pin ) {
-                            pin.tipo = gc.pin;
-                            gc.select(gc.pin.id);
-                            if (gc.map.zoom < 15)
-                                alert('Voce precisa dar mais zoom para adicionar uma melhoria');
-                                // toast.create({
-                                //     className: 'info',
-                                //     content: 'Voce precisa dar mais zoom para adicionar uma melhoria'
-                                // });
-                            else {
-                                if (typeof $cookie.get('pin') == 'string' && new Date($cookie.get('pin') * 1000) > new Date()) {
-                                    var diff = new Date($cookie.get('pin') * 1000).getTime() - new Date().getTime();
-
-                                    alert('Alguarde um tempo para adicionar outra melhoria');
+                        addPinService.appendModal()
+                            .then(function(descricao){
+                                pin.descricao = descricao;
+                                pin.lat = originalEventArgs[0].latLng.lat();
+                                pin.long = originalEventArgs[0].latLng.lng();
+                                $window.display_msg = false;
+                                if($window.sends){
+                                    return false;
+                                }
+                                if (gc.pin) {
+                                    pin.tipo = gc.pin;
+                                    gc.select(gc.pin.id);
+                                    if (gc.map.zoom < 15)
+                                        alert('Voce precisa dar mais zoom para adicionar uma melhoria');
                                     // toast.create({
                                     //     className: 'info',
-                                    //     content: 'Alguarde um tempo para adicionar outra melhoria'
+                                    //     content: 'Voce precisa dar mais zoom para adicionar uma melhoria'
                                     // });
+                                    else {
+                                        if (1==2&&typeof $cookie.get('pin') == 'string' && new Date($cookie.get('pin') * 1000) > new Date()) {
+                                            var diff = new Date($cookie.get('pin') * 1000).getTime() - new Date().getTime();
 
+                                            alert('Alguarde um tempo para adicionar outra melhoria');
+                                            // toast.create({
+                                            //     className: 'info',
+                                            //     content: 'Alguarde um tempo para adicionar outra melhoria'
+                                            // });
+
+                                        } else {
+                                            $cookie.put('pin', (new Date().setSeconds(new Date().getSeconds() + 30) / 1000))
+                                            $window.sends = true;
+                                            PinService.add(pin)
+                                                .then(function (response_pin) {
+                                                    $window.sends = false;
+                                                    gc.addPin(response_pin);
+                                                    toast.create({
+                                                        className: 'success',
+                                                        content: 'Melhoria Sugerida, Obrigado !'
+                                                    });
+                                                })
+                                        }
+
+
+                                    }
                                 } else {
-                                    $cookie.put('pin', (new Date().setSeconds(new Date().getSeconds() + 30) / 1000))
-                                    $window.sends = true;
-                                    PinService.add(pin)
-                                        .then(function (response_pin) {
-                                            $window.sends = false;
-                                            gc.addPin(response_pin);
-                                            toast.create({
-                                                className: 'success',
-                                                content: 'Melhoria Sugerida, Obrigado !'
-                                            });
-                                        })
+                                    if ((c % 4) == 0 && c != 0) {
+                                        toast.create({
+                                            className: 'info',
+                                            content: 'Caso estaja com duvida use o menu \'Como Usar\' aqui em cima'
+                                        });
+                                    }
+                                    c++;
+                                    console.log('Voce nao selecionou um pin')
                                 }
-
-
-                            }
-                        } else {
-                            if ((c % 4) == 0 && c != 0) {
-                                toast.create({
-                                    className: 'info',
-                                    content: 'Caso estaja com duvida use o menu \'Como Usar\' aqui em cima'
-                                });
-                            }
-                            c++;
-                            console.log('Voce nao selecionou um pin')
-                        }
+                            });
                     }
                 },
                 bounds: {}
@@ -143,6 +147,7 @@
         function addPin(pin) {
             var temp_pin = {
                 lat: pin.lat,
+                descricao: (pin.descricao)?pin.descricao:'',
                 lng: (pin.lng) ? pin.lng : pin.long,
                 icon: pin.imagem_icon,
                 status: pin.id_pin_status,
