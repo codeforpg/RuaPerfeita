@@ -65,7 +65,6 @@
                 refresh: false,
                 events: {
                     'click': function (mapModel, eventName, originalEventArgs) {
-                        console.log(123);
                         var pin = {};
                         pin.lat = originalEventArgs[0].latLng.lat()
                         pin.long = originalEventArgs[0].latLng.lng()
@@ -74,16 +73,23 @@
                             return false;
                         }
                         if (gc.pin ) {
-                            pin.tipo = gc.pin
+                            pin.tipo = gc.pin;
+                            gc.select(gc.pin.id);
                             if (gc.map.zoom < 15)
-                                toast.create({
-                                    className: 'info',
-                                    content: 'Voce precisa dar mais zoom para adicionar uma melhoria'
-                                });
+                                alert('Voce precisa dar mais zoom para adicionar uma melhoria');
+                                // toast.create({
+                                //     className: 'info',
+                                //     content: 'Voce precisa dar mais zoom para adicionar uma melhoria'
+                                // });
                             else {
                                 if (typeof $cookie.get('pin') == 'string' && new Date($cookie.get('pin') * 1000) > new Date()) {
-                                    console.log('toast ');
                                     var diff = new Date($cookie.get('pin') * 1000).getTime() - new Date().getTime();
+
+                                    alert('Alguarde um tempo para adicionar outra melhoria');
+                                    // toast.create({
+                                    //     className: 'info',
+                                    //     content: 'Alguarde um tempo para adicionar outra melhoria'
+                                    // });
 
                                 } else {
                                     $cookie.put('pin', (new Date().setSeconds(new Date().getSeconds() + 30) / 1000))
@@ -91,9 +97,7 @@
                                     PinService.add(pin)
                                         .then(function (response_pin) {
                                             $window.sends = false;
-                                            console.log('fim');
-                                            gc.addPin(response_pin)
-                                            gc.select(response_pin.id)
+                                            gc.addPin(response_pin);
                                             toast.create({
                                                 className: 'success',
                                                 content: 'Melhoria Sugerida, Obrigado !'
