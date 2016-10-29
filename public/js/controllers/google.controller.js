@@ -7,27 +7,37 @@
         .controller('GoogleController', GoogleController)
 
 
-    GoogleConfig.$inject = ['uiGmapGoogleMapApiProvider', 'ngToastProvider', '$cookiesProvider']
-    function GoogleConfig(GoogleMapsConfig, ngToastProvider, $cookiesProvider) {
+    GoogleConfig.$inject = ['uiGmapGoogleMapApiProvider', '$cookiesProvider' , 'toastrConfig']
+    function GoogleConfig(GoogleMapsConfig, $cookiesProvider, toastrConfig) {
         GoogleMapsConfig.configure({
             key: 'AIzaSyCsIhWQ9rLxC8UCpiKt5gies1N80io_gTs',
             v: '3.20',
             libraries: 'weather,geometry,visualization'
 
         })
-
-        ngToastProvider.configure({
-            animate: 'fade',
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
-        })
+        angular.extend(toastrConfig, {
+            autoDismiss: false,
+            containerId: 'toast-container',
+            maxOpened: 0,    
+            newestOnTop: true,
+            positionClass: 'toast-top-full-width',
+            preventDuplicates: false,
+            preventOpenDuplicates: false,
+            target: 'body',
+            iconClasses: {
+              error: 'toast-error',
+              info: 'toast-info',
+              success: 'toast-success',
+              warning: 'toast-warning'
+            }, 
+        });
 
         $cookiesProvider.expires = new Date().setMinutes(new Date().getMinutes() + 10);
     }
 
 
-    GoogleController.$inject = ['uiGmapGoogleMapApi', 'TipoService', 'PinService', '$rootScope', 'ngToast', 'ngDialog', '$cookies','$window','addPinService'];
-    function GoogleController(GoogleMap, TipoService, PinService, $rootScope, toast, Modal, $cookie,$window, addPinService) {
+    GoogleController.$inject = ['uiGmapGoogleMapApi', 'TipoService', 'PinService', '$rootScope', 'ngDialog', '$cookies','$window','addPinService', 'toastr'];
+    function GoogleController(GoogleMap, TipoService, PinService, $rootScope, Modal, $cookie, $window, addPinService, toastr) {
         var gc = this;
         gc.pins = [];
         gc.select = select;
@@ -44,6 +54,7 @@
 
         function init() {
             var c = 0 // contador quantas vezes clicou sem selecionar um pin
+            var showHelp = false;
             PinService.get()
                 .then(function (response) {
                     for (var i in response)
@@ -66,61 +77,46 @@
                 events: {
                     'click': function (mapModel, eventName, originalEventArgs) {
                         var pin = {};
+                        pin.lat = originalEventArgs[0].latLng.lat();
+                        pin.long = originalEventArgs[0].latLng.lng();
+
+                        if(!gc.pin){
+                            if(!gc.showHelp){
+                                gc.showHelp = true;
+                                toastr.info('Caso estaja com duvida use o menu \'Como Usar\' aqui em cima');
+                            }
+                            return false;
+                        }
+
+
+                        if(typeof $cookie.get('pin') == 'string' && new Date($cookie.get('pin') * 1000) > new Date()){
+                            var seconds = Math.round((Math.abs(new Date() - new Date($cookie.get('pin') * 1000)))/1000);
+                            toastr.info('Voce acabou de sugerir um melhoria, aguarde '+seconds+' segundos');
+                            gc.select(gc.pin);
+                            return false;
+                        }else if($cookie.get('pin')){
+                            $cookie.remove('pin');
+                        }
+
+                        if(gc.map.zoom < 15){
+                                toastr.info('Voce precisa dar mais zoom para adicionar uma melhoria');
+                                return false;
+                        }
+
+                        pin.tipo = gc.pin;
+
                         addPinService.appendModal()
                             .then(function(descricao){
                                 pin.descricao = descricao;
-                                pin.lat = originalEventArgs[0].latLng.lat();
-                                pin.long = originalEventArgs[0].latLng.lng();
-                                $window.display_msg = false;
-                                if($window.sends){
-                                    return false;
-                                }
-                                if (gc.pin) {
-                                    pin.tipo = gc.pin;
-                                    gc.select(gc.pin.id);
-                                    if (gc.map.zoom < 15)
-                                        alert('Voce precisa dar mais zoom para adicionar uma melhoria');
-                                    // toast.create({
-                                    //     className: 'info',
-                                    //     content: 'Voce precisa dar mais zoom para adicionar uma melhoria'
-                                    // });
-                                    else {
-                                        if (1==2&&typeof $cookie.get('pin') == 'string' && new Date($cookie.get('pin') * 1000) > new Date()) {
-                                            var diff = new Date($cookie.get('pin') * 1000).getTime() - new Date().getTime();
+                                $cookie.put('pin', (new Date().setSeconds(new Date().getSeconds() + 30) / 1000));
 
-                                            alert('Alguarde um tempo para adicionar outra melhoria');
-                                            // toast.create({
-                                            //     className: 'info',
-                                            //     content: 'Alguarde um tempo para adicionar outra melhoria'
-                                            // });
-
-                                        } else {
-                                            $cookie.put('pin', (new Date().setSeconds(new Date().getSeconds() + 30) / 1000))
-                                            $window.sends = true;
-                                            PinService.add(pin)
-                                                .then(function (response_pin) {
-                                                    $window.sends = false;
-                                                    gc.addPin(response_pin);
-                                                    toast.create({
-                                                        className: 'success',
-                                                        content: 'Melhoria Sugerida, Obrigado !'
-                                                    });
-                                                })
-                                        }
-
-
-                                    }
-                                } else {
-                                    if ((c % 4) == 0 && c != 0) {
-                                        toast.create({
-                                            className: 'info',
-                                            content: 'Caso estaja com duvida use o menu \'Como Usar\' aqui em cima'
-                                        });
-                                    }
-                                    c++;
-                                    console.log('Voce nao selecionou um pin')
-                                }
+                                PinService.add(pin)
+                                    .then(function (response_pin) {
+                                        gc.addPin(response_pin);
+                                        toastr.success('Melhoria Sugerida, Obrigado !');
+                                    });
                             });
+
                     }
                 },
                 bounds: {}
@@ -154,7 +150,7 @@
                 id_pin: pin.id_pin,
                 voto:(pin.voto)?pin.voto:0
             };
-            gc.pins.push(temp_pin)
+            gc.pins.push(temp_pin);
         }
 
         function select(id) {

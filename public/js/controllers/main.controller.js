@@ -4,9 +4,9 @@
     angular
         .module('app')
         .config(MainConfig)
-        .controller('MainController',MainController)
+        .controller('MainController',MainController);
     
-    MainConfig.$inject = ['$routeProvider','$locationProvider','RuaPerfeitaProvider']
+    MainConfig.$inject = ['$routeProvider','$locationProvider','RuaPerfeitaProvider'];
     function MainConfig(route,location,RuaPerfeita){
         route
             .when('/', {
@@ -19,7 +19,7 @@
         location.html5Mode(true);
     }
 
-    MainController.$inject = ['SocketService','TipoService']
+    MainController.$inject = ['SocketService','TipoService'];
     function MainController(Socket,Tipo) {
         var mc = this;
         var time;

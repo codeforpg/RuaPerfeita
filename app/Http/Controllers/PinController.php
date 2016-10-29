@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Validator;
 class PinController extends Controller
 {
     public function index() {
+
         $pin = new Pin();
         $result =  $pin->leftJoin('tipo','tipo','=','id_tipo')->get();
         return $result;

@@ -222,3 +222,8 @@ textarea {
     height: 110px;
 }
 
+.toast-top-full-width{
+    margin-top: 50px;
+    text-align: center; 
+}
+

@@ -29,9 +29,14 @@
     <script src="node_modules/angular-google-maps/dist/angular-google-maps.js"></script>
     <script src="node_modules/angular-simple-logger/dist/angular-simple-logger.min.js"></script>
     <script src="node_modules/material-design-lite/material.min.js"></script>
-    <script src="node_modules/ng-toast/dist/ngToast.js"></script>
+    <!-- <script src="node_modules/ng-toast/dist/ngToast.js"></script> -->
     <script src="node_modules/ng-dialog/js/ngDialog.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <!-- <script src="node_modules/angularjs-toaster/toaster.min.js"></script> -->
+
+    <script src="https://unpkg.com/angular-toastr/dist/angular-toastr.tpls.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/angular-toastr/dist/angular-toastr.css" />
+
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="/lib/socket.io.js"></script>
     <script src="js/main.js"></script>
@@ -60,7 +65,6 @@
             </nav>
         </div>
     </header>
-    <toast></toast>
     <main class="mdl-layout__content" ng-view>
     </main>
     <dialog class="col-md-5 no-border" id="como-usar">
@@ -110,8 +114,8 @@
                 <textarea ng-model="descricao"></textarea>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" id="save" data-dismiss="modal" class="btn btn-primary">Save changes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" id="save" data-dismiss="modal" class="btn btn-primary">Savar</button>
             </div>
         </div>
     </div>

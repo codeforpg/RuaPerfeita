@@ -3,7 +3,7 @@
 
     angular
         .module('app')
-        .service('SocketService',SocketService)
+        .service('SocketService',SocketService);
 
     function SocketService(){
         this.connect = connect;
