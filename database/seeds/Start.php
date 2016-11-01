@@ -156,7 +156,6 @@ class Start extends Seeder
                     $pin['long'] = substr_replace($linha_array[7], '.', 3, 0);
                     $pin['descricao'] = $linha_array[2]. " " . $linha_array[3] . " " . $linha_array[4] . $linha_array[6]. " ".$linha_array[5];
                     $pin['tipo'] = $tipo;
-                    dd($pin)
 
                     \App\Pin::create($pin);
                 }
