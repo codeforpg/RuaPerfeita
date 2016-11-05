@@ -1,0 +1,5 @@
+deployment:
+  production:
+    branch: master
+    commands:
+      - ssh deploy@code.codeforpg.com 'cd /var/www/domains/ruaperfeita && /bin/bash ./deploy.sh master y'
