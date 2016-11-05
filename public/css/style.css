@@ -150,8 +150,6 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
     left: 118px;
 }
 .active{
-    border: 1px solid black;
-    border-radius: 13px;
     background-color: yellow;
 }
 
@@ -216,3 +214,16 @@ img[src*="gstatic.com/"], img[src*="googleapis.com/"] {
 .melhorias-item--inactive {
   opacity: .3;
 }
+
+textarea {
+    resize: none;
+    font-weight: bold;
+    width: 100%;
+    height: 110px;
+}
+
+.toast-top-full-width{
+    margin-top: 50px;
+    text-align: center; 
+}
+

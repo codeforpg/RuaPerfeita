@@ -4,9 +4,9 @@
     angular
         .module('app')
         .config(MainConfig)
-        .controller('MainController',MainController)
+        .controller('MainController',MainController);
     
-    MainConfig.$inject = ['$routeProvider','$locationProvider','RuaPerfeitaProvider']
+    MainConfig.$inject = ['$routeProvider','$locationProvider','RuaPerfeitaProvider'];
     function MainConfig(route,location,RuaPerfeita){
         route
             .when('/', {
@@ -19,7 +19,7 @@
         location.html5Mode(true);
     }
 
-    MainController.$inject = ['SocketService','TipoService']
+    MainController.$inject = ['SocketService','TipoService'];
     function MainController(Socket,Tipo) {
         var mc = this;
         var time;
@@ -32,12 +32,6 @@
         /////////
 
         function init() {
-
-            Tipo.all()
-                .then(function(response){
-                    console.log(response);
-                    mc.tipos = response;
-                })
 
             mc.range = 50;
             mc.old_range = 50;
@@ -72,7 +66,6 @@
                     mc.range = 0;
                 }
             }
-            console.log(mc.range,mc.old_range)
             mc.old_range = mc.range;
         }
 

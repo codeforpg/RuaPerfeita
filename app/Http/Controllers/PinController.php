@@ -14,9 +14,17 @@ use Illuminate\Support\Facades\Validator;
 class PinController extends Controller
 {
     public function index() {
+
         $pin = new Pin();
         $result =  $pin->leftJoin('tipo','tipo','=','id_tipo')->get();
         return $result;
+
+    }
+    public function last() {
+
+        $pin = new Pin();
+        $last =  $pin->leftJoin('tipo','tipo','=','id_tipo')->where('pin.id_pin_status','=',2)->orderBy('pin.created_at','desc')->take(10)->get();
+        return $last;
 
     }
 
@@ -33,9 +41,13 @@ class PinController extends Controller
         $pin = new Pin();
         $post = $request->all();
         $post['expire_at'] = Carbon::now()->addDay(30)->toDateTimeString();
+        $post['id_pin_status'] = 2;
         $newPin = $pin->create($post);
 
-        return $newPin;
+        $pin = new Pin();
+        $result = $pin->where('id_pin','=',$newPin->id_pin)->leftJoin('tipo', 'tipo', '=', 'id_tipo')->first();
+
+        return $result;
     }
 
     public function update($id, Request $request)

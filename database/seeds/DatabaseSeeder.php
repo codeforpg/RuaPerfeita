@@ -119,9 +119,11 @@ class DatabaseSeeder extends Seeder
 
             // importação dos pins default
 
-//            $file = new \File();
             $content = \File::get(storage_path('IMPORTACAO.csv'));
             $content_array = explode("\n", $content);
+
+            $status = \App\PinStatus::create(['descricao'=>'fixo']);
+
             foreach ($content_array as $linha) {
                 if(strpos($linha,'Point') === 0){
                     $linha_array = explode(',',$linha);
@@ -154,6 +156,8 @@ class DatabaseSeeder extends Seeder
                     $pin['lat'] = substr_replace($linha_array[8], '.', 3, 0);
                     $pin['long'] = substr_replace($linha_array[7], '.', 3, 0);
                     $pin['tipo'] = $tipo;
+                    $pin['descricao'] = $linha_array[2]. " " . $linha_array[3] . " " . $linha_array[4] . $linha_array[6]. " ".$linha_array[5];
+                    $pin['id_pin_status'] = $status->id_pin_status;
                     \App\Pin::create($pin);
                 }
             }

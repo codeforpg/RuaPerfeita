@@ -5,6 +5,7 @@
   },
   "dependencies": {
     "bootstrap-sass": "^3.0.0",
+    "browserify": "^13.1.0",
     "express": "^4.13.4",
     "ioredis": "^2.0.1",
     "laravel-elixir": "^4.0.0",

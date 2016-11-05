@@ -1,5 +1,5 @@
 (function () {
-    'use strict'
+    'use strict';
 
     angular
         .module('app')
@@ -7,27 +7,37 @@
         .controller('GoogleController', GoogleController)
 
 
-    GoogleConfig.$inject = ['uiGmapGoogleMapApiProvider', 'ngToastProvider', '$cookiesProvider']
-    function GoogleConfig(GoogleMapsConfig, ngToastProvider, $cookiesProvider) {
+    GoogleConfig.$inject = ['uiGmapGoogleMapApiProvider', '$cookiesProvider' , 'toastrConfig']
+    function GoogleConfig(GoogleMapsConfig, $cookiesProvider, toastrConfig) {
         GoogleMapsConfig.configure({
             key: 'AIzaSyCsIhWQ9rLxC8UCpiKt5gies1N80io_gTs',
             v: '3.20',
             libraries: 'weather,geometry,visualization'
 
         })
-
-        ngToastProvider.configure({
-            animate: 'fade',
-            horizontalPosition: 'center',
-            verticalPosition: 'top'
-        })
+        angular.extend(toastrConfig, {
+            autoDismiss: false,
+            containerId: 'toast-container',
+            maxOpened: 0,    
+            newestOnTop: true,
+            positionClass: 'toast-top-full-width',
+            preventDuplicates: false,
+            preventOpenDuplicates: false,
+            target: 'body',
+            iconClasses: {
+              error: 'toast-error',
+              info: 'toast-info',
+              success: 'toast-success',
+              warning: 'toast-warning'
+            }, 
+        });
 
         $cookiesProvider.expires = new Date().setMinutes(new Date().getMinutes() + 10);
     }
 
 
-    GoogleController.$inject = ['uiGmapGoogleMapApi', 'PinService', '$rootScope', 'ngToast', 'ngDialog', '$cookies']
-    function GoogleController(GoogleMap, PinService, rootScope, toast, Modal, $cookie) {
+    GoogleController.$inject = ['uiGmapGoogleMapApi', 'TipoService', 'PinService', '$rootScope', 'ngDialog', '$cookies','$window','addPinService', 'toastr'];
+    function GoogleController(GoogleMap, TipoService, PinService, $rootScope, Modal, $cookie, $window, addPinService, toastr) {
         var gc = this;
         gc.pins = [];
         gc.select = select;
@@ -37,19 +47,29 @@
         gc.upVote = upVote;
         gc.showComentarios = showComentarios;
 
-        init()
+        init();
 
         //////////
 
 
         function init() {
-            var c = 0 // contador quantas vezes clicou sem selecionar um pin
+            var c = 0; // contador quantas vezes clicou sem selecionar um pin
+            var showHelp = false;
             PinService.get()
                 .then(function (response) {
                     for (var i in response)
-                        gc.addPin(response[i])
-                })
-            gc.template = 'templates/search.html'
+                        gc.addPin(response[i]);
+                });
+            PinService.last()
+                .then(function (response) {
+                    gc.lasts = response;
+                    console.log("last",gc.lasts);
+                });
+            TipoService.all()
+                .then(function (response) {
+                    gc.types = response;
+                });
+            gc.template = 'templates/search.html';
             gc.map = {
                 dragZoom: {options: {}},
                 center: {
@@ -61,49 +81,47 @@
                 refresh: false,
                 events: {
                     'click': function (mapModel, eventName, originalEventArgs) {
-                        console.log(eventName);
                         var pin = {};
-                        pin.lat = originalEventArgs[0].latLng.lat()
-                        pin.long = originalEventArgs[0].latLng.lng()
-                        if (gc.pin) {
-                            pin.tipo = gc.pin
-                            if (gc.map.zoom < 15)
-                                toast.create({
-                                    className: 'info',
-                                    content: 'Voce precisa dar mais zoom para adicionar uma melhoria'
-                                });
-                            else {
-                                if (typeof $cookie.get('pin') == 'string' && new Date($cookie.get('pin') * 1000) > new Date()) {
-                                    var diff = new Date($cookie.get('pin') * 1000).getTime() - new Date().getTime();
-                                    toast.create({
-                                        className: 'warning',
-                                        content: 'Aguarde ' + Math.round(Math.abs(diff / 1000)) + ' segundos para adicionar outra melhoria'
-                                    })
-                                } else {
-                                    $cookie.put('pin', (new Date().setSeconds(new Date().getSeconds() + 30) / 1000))
-                                    PinService.add(pin)
-                                        .then(function (response_pin) {
-                                            gc.addPin(response_pin)
-                                            gc.select(response_pin.id)
-                                            toast.create({
-                                                className: 'success',
-                                                content: 'Melhoria Sugerida, Obrigado !'
-                                            });
-                                        })
-                                }
+                        pin.lat = originalEventArgs[0].latLng.lat();
+                        pin.long = originalEventArgs[0].latLng.lng();
 
-
+                        if(!gc.pin){
+                            if(!gc.showHelp){
+                                gc.showHelp = true;
+                                toastr.info('Caso estaja com duvida use o menu \'Como Usar\' aqui em cima');
                             }
-                        } else {
-                            if ((c % 4) == 0 && c != 0) {
-                                toast.create({
-                                    className: 'info',
-                                    content: 'Caso estaja com duvida use o menu \'Como Usar\' aqui em cima'
-                                });
-                            }
-                            c++;
-                            console.log('Voce nao selecionou um pin')
+                            return false;
                         }
+
+
+                        if(typeof $cookie.get('pin') == 'string' && new Date($cookie.get('pin') * 1000) > new Date()){
+                            var seconds = Math.round((Math.abs(new Date() - new Date($cookie.get('pin') * 1000)))/1000);
+                            toastr.info('Voce acabou de sugerir um melhoria, aguarde '+seconds+' segundos');
+                            gc.select(gc.pin);
+                            return false;
+                        }else if($cookie.get('pin')){
+                            $cookie.remove('pin');
+                        }
+
+                        if(gc.map.zoom < 15){
+                                toastr.info('Voce precisa dar mais zoom para adicionar uma melhoria');
+                                return false;
+                        }
+
+                        pin.tipo = gc.pin;
+
+                        addPinService.appendModal()
+                            .then(function(descricao){
+                                pin.descricao = descricao;
+                                $cookie.put('pin', (new Date().setSeconds(new Date().getSeconds() + 30) / 1000));
+
+                                PinService.add(pin)
+                                    .then(function (response_pin) {
+                                        gc.addPin(response_pin);
+                                        toastr.success('Melhoria Sugerida, Obrigado !');
+                                    });
+                            });
+
                     }
                 },
                 bounds: {}
@@ -123,39 +141,21 @@
                             on: "Turn off"
                         }
                     }
-                }
-            })
-        }
-
-        function setIcon(tipo) {
-            switch (tipo) {
-                case 1:
-                    return 'icon/lombada.png'
-                    break;
-                case 2:
-                    return 'icon/nao_estacionamento.png'
-                    break;
-                case 3:
-                    return 'icon/nao_lombada.png'
-                    break;
-                case 4:
-                    return 'icon/nao_semaforo.png'
-                    break;
-                case 5:
-                    return 'icon/semaforo.png'
-                    break;
-            }
+                };
+            });
         }
 
         function addPin(pin) {
             var temp_pin = {
                 lat: pin.lat,
+                descricao: (pin.descricao)?pin.descricao:'',
                 lng: (pin.lng) ? pin.lng : pin.long,
                 icon: pin.imagem_icon,
+                status: pin.id_pin_status,
                 id_pin: pin.id_pin,
                 voto:(pin.voto)?pin.voto:0
-            }
-            gc.pins.push(temp_pin)
+            };
+            gc.pins.push(temp_pin);
         }
 
         function select(id) {
@@ -167,12 +167,12 @@
 
         function showComentarios(mapModel, eventName, originalEventArgs) {
             gc.pin_select = originalEventArgs.control;
-            gc.comentarios = base_url + '/comentarios/' + originalEventArgs.control.id_pin;
+            gc.comentarios = base_url + 'comentarios/' + originalEventArgs.control.id_pin;
         }
 
         function downVote(pin) {
             var cookie = $cookie.get('voto');
-            var todos_votos = []
+            var todos_votos = [];
             var acao_voto = false;
             if(typeof cookie == 'string'){
                 todos_votos = JSON.parse(cookie);
@@ -188,11 +188,11 @@
                         var update_pin = {
                             id_pin: todos_votos[i].id_pin,
                             voto: 1
-                        }
+                        };
                         PinService.update(update_pin)
                             .then(function(response){
-                                gc.pin_select = response.pin
-                            })
+                                gc.pin_select = response.pin;
+                            });
                     }else if(todos_votos[i].id_pin == pin.id_pin && todos_votos[i].type != '-'){
                         todos_votos.splice(todos_votos.indexOf(todos_votos[i]),1);
                         acao_voto = true;
@@ -208,11 +208,11 @@
                             id_pin: todos_votos[i].id_pin,
                             voto: -1
                         }
-                        PinService.update(update_pin)
+                        PinService.update(update_pin);
                         PinService.update(update_pin)
                             .then(function(response){
-                                gc.pin_select = response.pin
-                            })
+                                gc.pin_select = response.pin;
+                            });
                     }
                 }
                 if(search != '')
@@ -234,7 +234,7 @@
                 }
                 PinService.update(update_pin)
                     .then(function(response){
-                        gc.pin_select = response.pin
+                        gc.pin_select = response.pin;
                     })
             }
             $cookie.put('voto', JSON.stringify(todos_votos))

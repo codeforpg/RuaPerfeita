@@ -121,6 +121,8 @@ class Start extends Seeder
 //            $file = new \File();
             $content = \File::get(storage_path('IMPORTACAO.csv'));
             $content_array = explode("\n", $content);
+
+            //Point (-50.18031461741135502 -25.09207506347843974),0,Rua Londrina,Santo Antonio,Nova Russia,40,Controlador de Velocidade,-501803146174,-250920750635
             foreach ($content_array as $linha) {
                 if(strpos($linha,'Point') === 0){
                     $linha_array = explode(',',$linha);
@@ -152,7 +154,9 @@ class Start extends Seeder
                     $pin = [];
                     $pin['lat'] = substr_replace($linha_array[8], '.', 3, 0);
                     $pin['long'] = substr_replace($linha_array[7], '.', 3, 0);
+                    $pin['descricao'] = $linha_array[2]. " " . $linha_array[3] . " " . $linha_array[4] . $linha_array[6]. " ".$linha_array[5];
                     $pin['tipo'] = $tipo;
+
                     \App\Pin::create($pin);
                 }
             }
