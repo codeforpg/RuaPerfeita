@@ -43,6 +43,17 @@
                         </li>
                     </ul>
                 </div>
+                <div class="col-lg-10" ng-show="tab == 2">
+                    <div class="margin-top">
+                        <div ng-repeat="last in gc.lasts">
+                            <ul>
+                                <li>Criado em: {{ last.created_at | date:"dd/MM/yyyy HH:ii" }}</li>
+                                <li>Tipo: <img src="{{ last.imagem_icon }}" alt="{{ last.nome }}"> {{ last.nome }}</li>
+                                <li>Descrição: {{ last.descricao }}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-lg-10" ng-show="tab == 3">
                     <div class="margin-top">
                         <p>{{gc.pin_select.descricao}}</p>

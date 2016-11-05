@@ -47,19 +47,24 @@
         gc.upVote = upVote;
         gc.showComentarios = showComentarios;
 
-        init()
+        init();
 
         //////////
 
 
         function init() {
-            var c = 0 // contador quantas vezes clicou sem selecionar um pin
+            var c = 0; // contador quantas vezes clicou sem selecionar um pin
             var showHelp = false;
             PinService.get()
                 .then(function (response) {
                     for (var i in response)
-                        gc.addPin(response[i])
-                })
+                        gc.addPin(response[i]);
+                });
+            PinService.last()
+                .then(function (response) {
+                    gc.lasts = response;
+                    console.log("last",gc.lasts);
+                });
             TipoService.all()
                 .then(function (response) {
                     gc.types = response;
@@ -136,8 +141,8 @@
                             on: "Turn off"
                         }
                     }
-                }
-            })
+                };
+            });
         }
 
         function addPin(pin) {
@@ -183,11 +188,11 @@
                         var update_pin = {
                             id_pin: todos_votos[i].id_pin,
                             voto: 1
-                        }
+                        };
                         PinService.update(update_pin)
                             .then(function(response){
-                                gc.pin_select = response.pin
-                            })
+                                gc.pin_select = response.pin;
+                            });
                     }else if(todos_votos[i].id_pin == pin.id_pin && todos_votos[i].type != '-'){
                         todos_votos.splice(todos_votos.indexOf(todos_votos[i]),1);
                         acao_voto = true;
@@ -203,11 +208,11 @@
                             id_pin: todos_votos[i].id_pin,
                             voto: -1
                         }
-                        PinService.update(update_pin)
+                        PinService.update(update_pin);
                         PinService.update(update_pin)
                             .then(function(response){
-                                gc.pin_select = response.pin
-                            })
+                                gc.pin_select = response.pin;
+                            });
                     }
                 }
                 if(search != '')
@@ -229,7 +234,7 @@
                 }
                 PinService.update(update_pin)
                     .then(function(response){
-                        gc.pin_select = response.pin
+                        gc.pin_select = response.pin;
                     })
             }
             $cookie.put('voto', JSON.stringify(todos_votos))

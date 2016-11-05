@@ -20,6 +20,13 @@ class PinController extends Controller
         return $result;
 
     }
+    public function last() {
+
+        $pin = new Pin();
+        $last =  $pin->leftJoin('tipo','tipo','=','id_tipo')->where('pin.id_pin_status','=',2)->orderBy('pin.created_at','desc')->take(10)->get();
+        return $last;
+
+    }
 
     public function store(Request $request) {
 

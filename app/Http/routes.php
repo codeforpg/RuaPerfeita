@@ -36,3 +36,4 @@ Route::resource('categoria', 'CategoriaController', ['only' => ['index', 'store'
 Route::resource('voto', 'VotoController', ['only' => ['index', 'store', 'update']]);
 
 Route::get('tipo/all','TipoController@all');
+Route::get('last','PinController@last');
